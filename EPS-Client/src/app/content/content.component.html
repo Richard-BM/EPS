@@ -1,0 +1,26 @@
+<div class="MainContent" *ngIf="dataLoaded">
+  <div class="table">
+    <h1>Kunden</h1>
+    <app-client-table [displayClientDataSource]="displayClient"></app-client-table>
+  </div>
+
+  <div class="table">
+    <h1>Projekte</h1>
+    <app-project-table [displayProjectDataSource]="displayProject"></app-project-table>
+  </div>
+
+  <div class="table">
+    <h1>Termine</h1>
+    <app-appointment-table [displayAppointmentDataSource]="displayAppointment"></app-appointment-table>
+  </div>
+
+  <div class="table">
+    <h1>Personal</h1>
+    <app-person-table [displayPersonDataSource]="displayPerson"></app-person-table>
+  </div>
+
+  <div class="table">
+    <h1>Einsatzörtlichkeiten</h1>
+    <app-location-table [displayLocationDataSource]="displayLocation"></app-location-table>
+  </div>
+</div>
