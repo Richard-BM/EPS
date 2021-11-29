@@ -8,17 +8,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export const environment = {
     production: false,
-    msalConfiguration: {
-        protectedResourceMap: [['https://localhost:5001/Authentication/azuread', ['api://e8e676a2-c89b-4c71-a938-ca9e2989ec95/api.consume']]] as [string, string[]][],
-        consentScopes: [
-            'user.read',
-            'api://e8e676a2-c89b-4c71-a938-ca9e2989ec95/api.consume'
-        ],
-        clientId: "4f09e38e-45af-4eef-aefe-a829e4dacade",
-        authority: 'https://login.microsoftonline.com/1b19ca81-aaaf-45d8-abf3-61e9f878271a',
-        redirectUri: 'http://localhost:4200/login'
-    },
-    broadcastHubUrl: "https://localhost:5001/broadcasthub"
 };
 
 export function apiConfiguration() {

@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { MsalService } from '@azure/msal-angular';
-
-import { AuthenticationService } from './../../api/api/authentication.service'
-import { PositionGroup } from '../../../enums/positiongroup.enum';
+import { AuthenticationService } from '../../api/api/authentication.service';
 
 @Injectable()
 export class AuthenticationHandlerService {
 
     private jwtHelper = new JwtHelperService();
 
-    constructor(private apiAuthenticationService: AuthenticationService, private msalService: MsalService) { }
+    constructor(private apiAuthenticationService: AuthenticationService) { }
 
     authenticateWithUsername(username: string, password: string, remember: boolean): Observable<boolean> {
 
         return new Observable(observer => {
 
-            this.apiAuthenticationService.authenticationClassicPost({
-                username: username,
+          this.apiAuthenticationService.authenticationClassicPost({
+                email: username,
                 password: password
             }).subscribe(response => {
                 let result = false;
 
-                if (response.success && this.getRole(response.token) == PositionGroup.InternalStaff) {
+                if (response.success) {
                     this.cacheToken(response.token, remember);
                     result = true;
                 }
@@ -38,33 +35,6 @@ export class AuthenticationHandlerService {
         });
     }
 
-    startAzureADAuthentication(remember: boolean) {
-
-        return new Observable(observer => {
-
-            this.msalService.loginPopup().then(result => {
-
-                this.apiAuthenticationService.authenticationAzureadGet().subscribe(response => {
-
-                    let result = false;
-
-                    if (response.success && this.getRole(response.token) == PositionGroup.InternalStaff) {
-                        this.cacheToken(response.token, remember);
-                        result = true;
-                    }
-
-                    observer.next(result);
-                    observer.complete();
-
-                }, error => {
-                    observer.next(false);
-                    observer.complete();
-                });
-            });
-
-        });
-    }
-
     logout() {
         sessionStorage.removeItem("jwtToken");
         localStorage.removeItem("jwtToken");
@@ -75,7 +45,7 @@ export class AuthenticationHandlerService {
         let token = this.getCachedToken();
 
         if (token) {
-            return !this.jwtHelper.isTokenExpired(token) && this.getRole(token) == PositionGroup.InternalStaff;
+            return !this.jwtHelper.isTokenExpired(token);
         }
         else {
             return false;
@@ -105,18 +75,6 @@ export class AuthenticationHandlerService {
         }
         else
             return "";
-    }
-
-    getRole(token?: string): PositionGroup {
-
-        let currentToken = token ? token : this.getCachedToken();
-
-        if (currentToken) {
-            let decodedToken = this.jwtHelper.decodeToken(currentToken);
-            return decodedToken.role as number;
-        }
-        else
-            return PositionGroup.Unknown;
     }
 
     getCachedToken(): string {

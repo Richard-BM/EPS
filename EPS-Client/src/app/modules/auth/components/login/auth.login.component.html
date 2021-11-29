@@ -10,9 +10,8 @@
                 <div class="logo">
                     <img src="assets/layout/images/logo-pulse.png" alt="mirage-layout" />
                 </div>
-                <h1>Agency Pulse</h1>
+                <h1>EPS</h1>
                 <h3>Termin verwaltung</h3>
-                <!--<p>Willkommen! Bitte logge dich mit Deinen Agency Pulse - Zugangsdaten ein oder nutze Deinen Microsoft - Login.</p>-->
                 <div class="forms">
 
                     <p-tabView #loginTabView>
@@ -40,16 +39,15 @@
 
                             <div class="buttons">
                                 <button pButton type="submit" label="{{'AUTHMODULE.LOGINCOMPONENT.SIGNIN' | translate}}" iconPos="left"><i class="pi pi-unlock"></i></button>
-                                <!--<a href="#" class="secondary-button">Passwort vergessen?</a>-->
                             </div>
 
                             <div *ngIf="showClassicLoginError">
-                                <br /> <!--TODO: Über CSS statt br-tag?-->
+                                <br />
                                 <p-message severity="error" text="{{'AUTHMODULE.LOGINCOMPONENT.INVALIDCREDENTIALS' | translate}}"></p-message>
                             </div>
 
                             <div *ngIf="classicLoginForm.submitted && !classicLoginForm.valid && !showClassicLoginError">
-                                <br /> <!--TODO: Über CSS statt br-tag?-->
+                                <br />
                                 <p-message severity="warn" text="{{'AUTHMODULE.LOGINCOMPONENT.ENTERUSERNAMEANDPASSWORD' | translate}}"></p-message>
                             </div>
 

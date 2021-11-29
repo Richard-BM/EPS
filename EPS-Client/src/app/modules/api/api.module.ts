@@ -3,42 +3,24 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { AppointmentQuestionnaireResultsService } from './api/appointmentQuestionnaireResults.service';
-import { AppointmentsService } from './api/appointments.service';
+import { AppointmentService } from './api/appointment.service';
 import { AuthenticationService } from './api/authentication.service';
-import { ClientsService } from './api/clients.service';
-import { DataLockedService } from './api/dataLocked.service';
-import { DisplayTypesService } from './api/displayTypes.service';
+import { ClientService } from './api/client.service';
 import { LocationService } from './api/location.service';
-import { OrganisationalUnitsService } from './api/organisationalUnits.service';
-import { PositionGroupsService } from './api/positionGroups.service';
-import { ProjectTemplatesService } from './api/projectTemplates.service';
-import { ProjectsService } from './api/projects.service';
-import { ReportLinkTypesService } from './api/reportLinkTypes.service';
-import { SettingsService } from './api/settings.service';
-import { StatusService } from './api/status.service';
-import { WeatherForecastService } from './api/weatherForecast.service';
+import { PersonService } from './api/person.service';
+import { ProjectService } from './api/project.service';
 
 @NgModule({
   imports:      [],
   declarations: [],
   exports:      [],
   providers: [
-    AppointmentQuestionnaireResultsService,
-    AppointmentsService,
+    AppointmentService,
     AuthenticationService,
-    ClientsService,
-    DataLockedService,
-    DisplayTypesService,
+    ClientService,
     LocationService,
-    OrganisationalUnitsService,
-    PositionGroupsService,
-    ProjectTemplatesService,
-    ProjectsService,
-    ReportLinkTypesService,
-    SettingsService,
-    StatusService,
-    WeatherForecastService ]
+    PersonService,
+    ProjectService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

@@ -84,14 +84,13 @@ import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
 import {AppMenuComponent} from './layoutComponents/menu/app.menu.component';
 import {AppMenuitemComponent} from './layoutComponents/menuitem/app.menuitem.component';
-import { AppBreadcrumbComponent } from './layoutComponents/breadcrumb/app.breadcrumb.component';
+import {AppBreadcrumbComponent } from './layoutComponents/breadcrumb/app.breadcrumb.component';
 import {AppConfigComponent} from './layoutComponents/config/app.config.component';
 import {AppRightPanelComponent} from './layoutComponents/rightpanel/app.rightpanel.component';
 import {AppTopBarComponent} from './layoutComponents/topbar/app.topbar.component';
 import {AppFooterComponent} from './layoutComponents/footer/app.footer.component';
 
 // Application services
-import {BreadcrumbService} from './services/breadcrumb.service';
 import {MenuService} from './services/app.menu.service';
 import { AppCodeModule } from './layoutComponents/code/app.code.component';
 
@@ -101,14 +100,13 @@ import { Configuration } from './modules/api';
 import { LanguageService } from './services/language.service';
 
 //Other
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { environment, HttpLoaderFactory, apiConfiguration } from '../environments/environment';
 import { WizardModule } from './modules/wizard/wizard.module';
 import { UpdateDateHttpInterceptor } from './httpInterceptors/updatedate.interceptor';
-import { SignalRService } from './services/signalr.service';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ConfirmationService } from 'primeng/api';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BreadcrumbService } from './services/breadcrumb.service';
 
 @NgModule({
     imports: [
@@ -195,23 +193,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
                 deps: [HttpClient]
             }
         }),
-        //TODO:n MSAL auf aktuelle Version updaten und auf OAuth2 - PKCE umstellen
-        MsalModule.forRoot({
-            auth: {
-                clientId: environment.msalConfiguration.clientId,
-                authority: environment.msalConfiguration.authority,
-                redirectUri: environment.msalConfiguration.redirectUri
-            },
-            cache: {
-                cacheLocation: 'localStorage'
-            }
-        }, {
-            popUp: true,
-            consentScopes: environment.msalConfiguration.consentScopes,
-            unprotectedResources: ['/assets/'],
-            protectedResourceMap: environment.msalConfiguration.protectedResourceMap,
-            extraQueryParameters: {}
-        }),
         DashboardModule,
         WizardModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
@@ -235,11 +216,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         AppErrorComponent
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: MsalInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: UpdateDateHttpInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        MenuService, BreadcrumbService, LanguageService, DatePipe,
-        SignalRService, ConfirmationService
+        MenuService, BreadcrumbService, LanguageService, DatePipe, ConfirmationService
     ],
     bootstrap: [AppComponent]
 })

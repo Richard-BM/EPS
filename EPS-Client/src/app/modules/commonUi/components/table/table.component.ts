@@ -5,8 +5,6 @@ import { FilterService, MenuItem } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
 import { InputNumber } from 'primeng/inputnumber';
 import { Table } from 'primeng/table';
-import { DataLockedType } from '../../../../enums/dataLockedType.enum';
-import { DataLockedResponse, DataLockedService } from '../../../api';
 import { AuthenticationHandlerService } from '../../../auth/services/authenticationhandler.service';
 import { ColumnDisplayType } from '../../enums/columnDisplayType.enum';
 import { ColumnDefinition } from '../../interfaces/columnDefinition.interface';
@@ -26,7 +24,6 @@ export class TableComponent implements OnInit, AfterViewInit {
     @Input() rowsPerPageOptions: number[] = [10, 25, 50, 100];
     @Input() showLoadingSymbol = false;
     @Input() editable = false;
-    @Input() dataLockedType: DataLockedType;
 
     @Output() onEditCompleted = new EventEmitter();
 
@@ -41,8 +38,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     public editModeActivated: boolean = false;
     selectedRow: any;
 
-    constructor(private filterService: FilterService, private datePipe: DatePipe
-        , private dataLockedService: DataLockedService, private authHandler: AuthenticationHandlerService
+    constructor(private filterService: FilterService, private datePipe: DatePipe, private authHandler: AuthenticationHandlerService
         , private translateService: TranslateService, private renderer: Renderer2) {
         this.filterService.register('dateRange', (value, filter): boolean => {
 
@@ -100,13 +96,6 @@ export class TableComponent implements OnInit, AfterViewInit {
         this.table.clear();
     }
 
-    private setDataLockedToolTip(dataLocked: DataLockedResponse) {
-
-        if (dataLocked)
-            this.editTooltip = this.translateService.instant("COMMONUIMODULE.TABLECOMPONENT.EDITLOCKED") + ": "
-                + dataLocked.lockedByPerson.lastname + ", "
-                + dataLocked.lockedByPerson.firstname;
-    }
 
     public onEditInit(event) {
 
@@ -118,30 +107,8 @@ export class TableComponent implements OnInit, AfterViewInit {
         this.editModeActivated = true;
 
         if (!columnDefinition.cellEditablePredicate || columnDefinition.cellEditablePredicate(item)) {
-            if (this.dataLockedType) {
-                this.dataLockedService.dataLockedEntityIdGet(item.id, true).subscribe(response => {
-                    //TOOD: Möglicher Bug. Erstellen und löschen von DataLocked - Datensätzen können sich zeitlich überschneiden,
-                    //    wenn man zwischen Zellen wechselt(???).
-                    if (!response || response.lockedByPerson.id == this.authHandler.getUserId()) {
-                        this.dataLockedService.dataLockedPost({
-                            lockedEntityId: item.id,
-                            dataLockedTypeId: this.dataLockedType,
-                            lockedByPersonId: this.authHandler.getUserId()
-                        }).subscribe(response => {
-                            item.editable = true;
-                            this.focusCellInput(columnDefinition.displayType);
-                        });
-                    }
-                    else {
-                        this.setDataLockedToolTip(response);
-                        item.editable = false;
-                    }
-                });
-            }
-            else {
-                item.editable = true;
-                this.focusCellInput(columnDefinition.displayType);
-            }
+            item.editable = true;
+            this.focusCellInput(columnDefinition.displayType);
         }
         else
             this.editTooltip = columnDefinition.cellNotEditableTooltip;
@@ -153,9 +120,6 @@ export class TableComponent implements OnInit, AfterViewInit {
         item[event.field] = this.editValueBackup;
         this.editValueBackup = null;
         this.editModeActivated = false;
-
-        if (this.dataLockedType)
-            this.dataLockedService.dataLockedEntityIdDelete(item.id).subscribe();
     }
 
     public onEditComplete(event) {
@@ -170,9 +134,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
         this.editValueBackup = null;
         this.editModeActivated = false;
-
-        if (this.dataLockedType)
-            this.dataLockedService.dataLockedEntityIdDelete(event.data.id).subscribe();
     }
 
     private focusCellInput(columnDisplayTyoe: ColumnDisplayType) {

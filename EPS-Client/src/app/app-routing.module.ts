@@ -16,8 +16,8 @@ import { OverviewComponent } from './modules/dashboard/components/overview/overv
         RouterModule.forRoot([
             {
                 path: '', component: AppMainComponent, canActivate: [AuthGuard],
-                children: [
-                    { path: '', component: OverviewComponent }
+            children: [
+              { path: '', component: OverviewComponent }
                 ]
             },
             { path: 'error', component: AppErrorComponent },
