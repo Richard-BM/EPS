@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EPS.Dtos.Response;
 using EPS.models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,9 @@ using System.Threading.Tasks;
 namespace EPS.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [SwaggerResponse(401, "The JWT is missing or invalid")]
     public class LocationController : ControllerBase
     {
         private readonly PlanningSystemContext _planningSystemContext;

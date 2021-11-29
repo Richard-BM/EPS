@@ -27,7 +27,7 @@ namespace EPS.models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=127.0.0.1, 1234;Initial Catalog=PlanningSystem;User ID=EPS-API;Password=bpBtu7cMUURpD9hg");
+                optionsBuilder.UseSqlServer("Server=127.0.0.1, 1234;Database=PlanningSystem;Trusted_Connection=True;User ID=EPS-API;Password=bpBtu7cMUURpD9hg;Integrated Security=False");
             }
         }
 
@@ -42,8 +42,8 @@ namespace EPS.models
                 entity.ToTable("tbl_Appointment");
 
                 entity.Property(e => e.IdAppointment)
-                    .HasColumnName("ID_Appointment")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_Appointment");
 
                 entity.Property(e => e.IdLocation).HasColumnName("ID_Location");
 
@@ -74,8 +74,8 @@ namespace EPS.models
                 entity.ToTable("tbl_Client");
 
                 entity.Property(e => e.IdClient)
-                    .HasColumnName("ID_Client")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_Client");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -89,8 +89,8 @@ namespace EPS.models
                 entity.ToTable("tbl_Location");
 
                 entity.Property(e => e.IdLocation)
-                    .HasColumnName("ID_Location")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_Location");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -116,8 +116,8 @@ namespace EPS.models
                 entity.ToTable("tbl_Person");
 
                 entity.Property(e => e.IdPerson)
-                    .HasColumnName("ID_Person")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_Person");
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
@@ -142,8 +142,8 @@ namespace EPS.models
                 entity.ToTable("tbl_Project");
 
                 entity.Property(e => e.IdProject)
-                    .HasColumnName("ID_Project")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_Project");
 
                 entity.Property(e => e.IdClient).HasColumnName("ID_Client");
 

@@ -9,11 +9,14 @@ using EPS.models;
 using EPS.Dtos.Response;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EPS.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [SwaggerResponse(401, "The JWT is missing or invalid")]
     public class PersonController : ControllerBase
     {
         private readonly PlanningSystemContext _planningSystemContext;

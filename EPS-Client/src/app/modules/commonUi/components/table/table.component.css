@@ -1,0 +1,19 @@
+.true-icon {
+    color: green;
+    font-size: 1.25rem;
+}
+.false-icon {
+    color: red;
+    font-size: 1.25rem;
+}
+
+.cellReadMode {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th {
+    word-break: break-all;
+    white-space: normal !important;
+}

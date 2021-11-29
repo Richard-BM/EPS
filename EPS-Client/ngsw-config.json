@@ -1,0 +1,82 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "Agency Pulse - BL Web",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/src/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "clients",
+      "urls": ["https://localhost:5001/clients/**" ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "1d",
+        "timeout": "5s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "projects",
+      "urls": ["https://localhost:5001/projects/**" ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "1d",
+        "timeout": "5s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "appointments",
+      "urls": ["https://localhost:5001/appointments/**" ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "30m",
+        "timeout": "5s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "locations",
+      "urls": ["https://localhost:5001/location/**" ],
+      "cacheConfig": {
+        "maxSize": 20,
+        "maxAge": "30m",
+        "timeout": "5s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "general",
+      "urls": ["https://localhost:5001/**" ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "10m",
+        "timeout": "5s",
+        "strategy": "freshness"
+      }
+    }
+  ]
+}

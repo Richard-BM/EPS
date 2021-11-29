@@ -1,0 +1,49 @@
+{
+  "PRELOAD": "LOADED",
+  "APPMODULE": {
+    "MENUITEMS": {
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": "Appointments",
+      "OVERVIEW": "Overview",
+      "IMPORT": "Import",
+      "QUESTIONNAIRES": "Questionnaires",
+      "CHECK": "Check",
+      "DESIGNER": "Designer",
+      "REPORTING": "Reporting",
+      "REPORTINGPORTAL": "Reporting Portal",
+      "LOCATIONS": "Locations",
+      "STAFF": "Staff",
+      "ADMINISTRATION": "Administration",
+      "PROJECTS": "Projects",
+      "SETTINGS": "Settings"
+    },
+    "TOPBAR": {
+      "SIGNOUT": "Sign out",
+      "WELCOME": "Welcome",
+      "PROJECTMANAGER": "Projectmanager"
+    }
+  },
+  "BREADCRUMBS": {
+    "APPOINTMENTS": "Appointments",
+    "OVERVIEW": "Overview"
+  },
+  "AUTHMODULE": {
+    "LOGINCOMPONENT": {
+      "MICROSOFTACCOUNT": "Microsoft Account",
+      "REMEMBERSIGNIN": "Stay logged in",
+      "USERNAME": "Username",
+      "ENTERUSERNAME": "Enter username",
+      "PASSWORD": "Password",
+      "ENTERPASSWORD": "Enter password",
+      "SIGNIN": "Sign in",
+      "INVALIDCREDENTIALS": "Your login data is not correct.",
+      "ENTERUSERNAMEANDPASSWORD": "Please enter username and password.",
+      "ERROR": "An error occurred during the login process."
+    }
+  },
+  "APPOINTMENTMODULE": {
+    "OVERVIEWCOMPONENT": {
+      "TITLE": "Appointment Overview"
+    }
+  }
+}

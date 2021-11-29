@@ -1,0 +1,11 @@
+﻿<div class="p-mb-3 p-text-left">{{this.config.data.message}}</div>
+
+<div class="controls">
+    <div class="p-field-checkbox">
+        <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary"></p-checkbox>
+        <label for="binary">{{this.config.data.checkBoxMessage}}</label>
+    </div>
+
+    <button type="button" (click)="diaglogResult(false)" pButton icon="pi pi-times" label="Nein"></button>
+    <button type="button" (click)="diaglogResult(true)" [disabled]="!checked" pButton icon="pi pi pi-check" label="Ja"></button>
+</div>

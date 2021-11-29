@@ -1,0 +1,65 @@
+<div class="login-body" [ngClass]="{'layout-dark': false, 'layout-light': true}">
+
+    <div class="login-content">
+        <!--<div class="night-switch">
+            <p-button styleClass="dark-switch"  icon="pi pi-circle-on" (click)="dark = true"></p-button>
+            <p-button styleClass="light-switch"  icon="pi pi-circle-off" (click)="dark = false"></p-button>
+        </div>-->
+        <div class="login-panel">
+            <div class="login-panel-content">
+                <div class="logo">
+                    <img src="assets/layout/images/logo-pulse.png" alt="mirage-layout" />
+                </div>
+                <h1>Agency Pulse</h1>
+                <h3>Termin verwaltung</h3>
+                <!--<p>Willkommen! Bitte logge dich mit Deinen Agency Pulse - Zugangsdaten ein oder nutze Deinen Microsoft - Login.</p>-->
+                <div class="forms">
+
+                    <p-tabView #loginTabView>
+
+
+                        <form (ngSubmit)="onClassicLogin()" #classicLoginForm="ngForm">
+                            <div class="login-input-wrapper">
+                                <label for="username">{{'AUTHMODULE.LOGINCOMPONENT.USERNAME' | translate}}</label>
+                                <input id="username" name="username" pInputText placeholder="{{'AUTHMODULE.LOGINCOMPONENT.ENTERUSERNAME' | translate}}" required
+                                       [(ngModel)]="classicLoginFormModel.username" />
+                                <i class="pi pi-user"></i>
+                            </div>
+
+                            <div class="login-input-wrapper">
+                                <label for="password">{{'AUTHMODULE.LOGINCOMPONENT.PASSWORD' | translate}}</label>
+                                <input type="password" id="password" name="password" placeholder="{{'AUTHMODULE.LOGINCOMPONENT.ENTERPASSWORD' | translate}}"
+                                       pPassword [feedback]="false" required [(ngModel)]="classicLoginFormModel.password" />
+                                <i class="pi pi-lock"></i>
+                            </div>
+
+                            <div class="p-col-12">
+                                <p-checkbox id="classicLoginRemember" name="classicLoginRemember" label="{{'AUTHMODULE.LOGINCOMPONENT.REMEMBERSIGNIN' | translate}}"
+                                            binary="true" [(ngModel)]="classicLoginFormModel.remember"></p-checkbox>
+                            </div>
+
+                            <div class="buttons">
+                                <button pButton type="submit" label="{{'AUTHMODULE.LOGINCOMPONENT.SIGNIN' | translate}}" iconPos="left"><i class="pi pi-unlock"></i></button>
+                                <!--<a href="#" class="secondary-button">Passwort vergessen?</a>-->
+                            </div>
+
+                            <div *ngIf="showClassicLoginError">
+                                <br /> <!--TODO: Über CSS statt br-tag?-->
+                                <p-message severity="error" text="{{'AUTHMODULE.LOGINCOMPONENT.INVALIDCREDENTIALS' | translate}}"></p-message>
+                            </div>
+
+                            <div *ngIf="classicLoginForm.submitted && !classicLoginForm.valid && !showClassicLoginError">
+                                <br /> <!--TODO: Über CSS statt br-tag?-->
+                                <p-message severity="warn" text="{{'AUTHMODULE.LOGINCOMPONENT.ENTERUSERNAMEANDPASSWORD' | translate}}"></p-message>
+                            </div>
+
+                        </form>
+                    </p-tabView>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="desert"></div>
+    </div>
+</div>

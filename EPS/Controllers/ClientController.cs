@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using EPS.Dtos.Response;
 using EPS.models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +12,9 @@ using System.Threading.Tasks;
 namespace EPS.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [SwaggerResponse(401, "The JWT is missing or invalid")]
     public class ClientController : ControllerBase
     {
         private readonly PlanningSystemContext _planningSystemContext;

@@ -1,0 +1,151 @@
+{
+  "PRELOAD": "LOADED",
+  "WEEKDAYSSHORT": "Mo;Di;Mi;Do;Fr;Sa;So",
+  "primeng": {
+    "startsWith": "Starts with",
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "endsWith": "Ends with",
+    "equals": "Equals",
+    "notEquals": "Not equals",
+    "noFilter": "No Filter",
+    "lt": "Less than",
+    "lte": "Less than or equal to",
+    "gt": "Greater than",
+    "gte": "Great then or equals",
+    "is": "Is",
+    "isNot": "Is not",
+    "before": "Before",
+    "after": "After",
+    "clear": "Löschen",
+    "apply": "Anwenden",
+    "matchAll": "Match All",
+    "matchAny": "Match Any",
+    "addRule": "Regel hinzufügen",
+    "removeRule": "Regel entfernen",
+    "accept": "Ja",
+    "reject": "Nein",
+    "choose": "Auswählen",
+    "upload": "Hochladen",
+    "cancel": "Abbrechen",
+    "dayNames": [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag" ],
+    "dayNamesShort": [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+    "dayNamesMin": [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+    "monthNames": [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
+    "monthNamesShort": [ "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sept", "Okt", "Nov", "Dez" ],
+    "today": "Heute",
+    "weekHeader": "Wk"
+  },
+  "COMMON": {
+    "NORESULTS": "Keine Treffer.",
+    "MANDATORYFIELD": "Pflichtangabe.",
+    "CHECKYOURINPUT": "Überprüfen Sie bitte Ihre Eingaben.",
+    "YES": "Ja",
+    "NO": "Nein",
+    "CLOSE": "Schließen",
+    "ERROR": "Fehler",
+    "GENERALERRORMESSAGE": "Bei der eben ausgeführten Aktion ist ein Fehler aufgetreten.",
+    "SAVE": "Speichern",
+    "NEXT": "Weiter",
+    "PREVIOUS": "Zurück",
+    "CANCEL": "Abbrechen",
+    "REFRESH": "Aktualisieren"
+  },
+  "APPMODULE": {
+    "MENUITEMS": {
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": "Termine",
+      "OVERVIEW": "Übersicht",
+      "IMPORT": "Importieren",
+      "QUESTIONNAIRES": "Fragebögen",
+      "CHECK": "Kontrolle",
+      "DESIGNER": "Designer",
+      "REPORTING": "Reporting",
+      "REPORTINGPORTAL": "Reporting Portal",
+      "LOCATIONS": "Märkte",
+      "STAFF": "Personal",
+      "ADMINISTRATION": "Verwaltung",
+      "CLIENTS": "Kunden",
+      "PROJECTS": "Projekte",
+      "SETTINGS": "Einstellungen"
+    },
+    "TOPBAR": {
+      "SIGNOUT": "Abmelden",
+      "WELCOME": "Willkommen",
+      "PROJECTMANAGER": "Projektmanager"
+    }
+  },
+  "BREADCRUMBS": {
+    "APPOINTMENTS": "Termine",
+    "OVERVIEW": "Übersicht"
+  },
+  "AUTHMODULE": {
+    "LOGINCOMPONENT": {
+      "MICROSOFTACCOUNT": "Microsoft Konto",
+      "REMEMBERSIGNIN": "Eingeloggt bleiben",
+      "USERNAME": "Benutzername",
+      "ENTERUSERNAME": "Benutzernamen eingeben",
+      "PASSWORD": "Passwort",
+      "ENTERPASSWORD": "Passwort eingeben",
+      "SIGNIN": "Anmelden",
+      "INVALIDCREDENTIALS": "Deine Anmeldedaten sind nicht korrekt.",
+      "ENTERUSERNAMEANDPASSWORD": "Bitte Benutzername und Passwort eingeben.",
+      "ERROR": "Beim Anmeldevorgang ist ein Fehler aufgetreten."
+    }
+  },
+  "DASHBOARDMODULE": {
+    "OVERVIEWCOMPONENT": {
+      "TITLE": "Terminübersicht",
+      "SELECTCLIENTS": "Kunden auswählen",
+      "SELECTEDCLIENTSCOUNT": "{0} Kunden ausgewählt",
+      "SELECTPROJECTS": "Projekte auswählen",
+      "SELECTEDPROJECTSCOUNT": "{0} Projekte ausgewählt",
+      "SELECTYEARS": "Jahre auswählen",
+      "SELECTEDYEARSCOUNT": "{0} Jahre ausgewählt",
+      "APPLYFILTER": "Filter anwenden",
+      "NUMBEROFAPPOINTMENTS": "Anzahl Termine:"
+    },
+    "APPOINTMENTCOMPONENT": {
+      "CREATEAPPOINTMENT": "Termin erstellen",
+      "EDITAPPOINTMENT": "Termin bearbeiten",
+      "DELETEAPPOINTMENT": "Termin entfernen",
+      "DELETEAPPOINTMENTQUESTION": "Durch das Löschen eines Termines werden sämtliche Informationen zu diesem Termin entfernt. Es können nur Termine mit dem Terminstatus 'Anfrage ausstehend' entfernt werden. Möchten Sie den aktuellen Termin wirklich löschen?",
+      "APPOINTMENTAUTHORIZATION": "Termin Berechtigung",
+      "APPOINTMENTDELETENOTAUTHORIZED": "Aufgrund des aktuellen Terminstatus, sind Sie sind nicht berechtigt diesen Termin zu bearbeiten oder zu entfernen."
+    },
+    "APPOINTMENTASSISTENTCOMPONENT": {
+      "APPOINTMENTDATA": "Termindaten",
+      "APPOINTMENTLOCATION": "Örtlichkeit",
+      "CREATIONTITLE": "Termin erstellen",
+      "EDITTITLE": "Termin bearbeiten",
+      "DATE": "Datum",
+      "TIMEFROM": "Uhrzeit von",
+      "TIMETO": "Uhrzeit bis",
+      "REQUESTCONTRACTOR": "Name des bevorzugten Auftragnehmers",
+      "SELECTPROJECT": "Projekt auswählen",
+      "PROJECT": "Projekt",
+      "CANCELQUESTION": "Möchten Sie den aktuellen Vorgang wirklich abbrechen? Ihre Eingaben wurden noch nicht gespeichert und gehen daher verloren.",
+      "LOCATIONNAME": "Örtlichkeitsname",
+      "CITY": "Ortsname",
+      "STREET": "Straße",
+      "POSTALCODE": "Postleitzahl",
+      "SEARCHRADIUS": "Umkreis",
+      "SEARCH": "Suchen",
+      "APPOINTMENTMESSAGECREATEDTITLE": "Terminanlage",
+      "APPOINTMENTSUCCESSFULCREATED": "Der Termin wurde erfolgreich angelegt.",
+      "APPOINTMENTMESSAGEEDITTITLE": "Termin bearbeitet",
+      "APPOINTMENTSUCCESSFULEDITED": "Der Termin wurde erfolgreich bearbeitet."
+    }
+  },
+  "COMMONUIMODULE": {
+    "TABLECOMPONENT": {
+      "EMPTYMESSAGE": "Es existieren keine Einträge oder es konnten keine Einträge auf Basis Ihrer Filtereinstellungen gefunden werden.",
+      "ANY": "Alle",
+      "NUMBEROFRECORDS": "Anzahl Datensätze:",
+      "SELECTEDITEMSCOUNT": "{0} Elemente ausgewählt",
+      "SELECTDATE": "Datum auswählen",
+      "SELECTTIME": "Uhrzeit auswählen",
+      "EDITLOCKED": "Bearbeitung gesperrt. Wird bearbeitet von"
+    }
+  }
+}

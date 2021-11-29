@@ -1,0 +1,41 @@
+<div class="splash-screen" *ngIf="overviewIsLoading">
+    <div class="spinner">
+        <span class="ball-1"></span>
+        <span class="ball-2"></span>
+        <span class="ball-3"></span>
+        <span class="ball-4"></span>
+        <span class="ball-5"></span>
+        <span class="ball-6"></span>
+        <span class="ball-7"></span>
+        <span class="ball-8"></span>
+    </div>
+</div>
+<div class="p-grid" *ngIf="!overviewIsLoading">
+    <div class="p-col-12">
+        <div class="card">
+            <h4>{{'DASHBOARDMODULE.OVERVIEWCOMPONENT.TITLE' | translate}}</h4>
+
+            <p-toolbar>
+                <div class="p-toolbar-group-left">
+                    <div class="projectFilter">
+                        <p-multiSelect [options]="filterableProjects" [(ngModel)]="selectedProjects" optionLabel="name"
+                                       placeholder="{{'DASHBOARDMODULE.OVERVIEWCOMPONENT.SELECTPROJECTS' | translate}}" maxSelectedLabels="0"
+                                       selectedItemsLabel="{{'DASHBOARDMODULE.OVERVIEWCOMPONENT.SELECTEDPROJECTSCOUNT' | translate}}"
+                                       emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"></p-multiSelect>
+                    </div>
+                </div>
+
+                <div class="p-toolbar-group-right">
+                    <div class="p-mt-2">
+                        <p-button icon="pi pi-filter" iconPos="left" (onClick)="onFilter($event)"
+                                  label="{{'DASHBOARDMODULE.OVERVIEWCOMPONENT.APPLYFILTER' | translate}}"></p-button>
+                    </div>
+
+                </div>
+            </p-toolbar>
+
+            <app-appointment></app-appointment>
+
+        </div>
+    </div>
+</div>

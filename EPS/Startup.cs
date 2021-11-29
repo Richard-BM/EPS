@@ -1,3 +1,5 @@
+using EPS.Logic;
+using EPS.Logic.Interfaces;
 using EPS.models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,9 @@ namespace EPS
                     builder.AddConsole();
                 }));
             });
+
+            services.AddScoped<IAuthenticationLogic, AuthenticationLogic>();
+
 
             services.AddSwaggerGen(c =>
             {

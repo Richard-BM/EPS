@@ -1,0 +1,142 @@
+<p-tabView #appointmentTabView [(activeIndex)]="index">
+    <p-tabPanel header="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.APPOINTMENTDATA' | translate}}"
+                leftIcon="pi pi-calendar">
+        <form #appointmentDetailForm="ngForm">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="projectInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.SELECTPROJECT' | translate}}:*</label>
+                    <p-dropdown #projectInput="ngModel" id="projectInput" name="projectInput" [options]="appointmentGeneralService.projects" optionLabel="name" [(ngModel)]="selectedProject" [filter]="false"
+                                placeholder="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.PROJECT' | translate}}"
+                                emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"
+                                [autoDisplayFirst]="false" required
+                                [disabled]="appointmentEdit.changed"></p-dropdown>
+                    <small id="projectInput-mandatory" class="p-invalid"
+                           [ngStyle]="{'display': projectInput.invalid && (projectInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+                        {{'COMMON.MANDATORYFIELD' | translate}}
+                    </small>
+                </div>
+            </div>
+
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="projectInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.DATE' | translate}}:*</label>
+                    <p-calendar #plannendFromInput="ngModel" id="plannendFromInput" name="plannendFromInput" [touchUI]="true" dateFormat="dd.mm.yy" selectionMode="single"
+                                showWeek="true" showButtonBar="true"
+                                placeholder="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.DATE' | translate}}"
+                                [(ngModel)]="appointmentEdit.date"
+                                required></p-calendar>
+                    <small id="plannendFromInput-mandatory" class="p-invalid" [ngStyle]="{'display': plannendFromInput.invalid && (plannendFromInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+                        {{'COMMON.MANDATORYFIELD' | translate}}
+                    </small>
+                </div>
+            </div>
+
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <p-calendar #timeFromInput="ngModel" id="timeFromInput" name="timeFromInput" dateFormat="dd.mm.yy" timeOnly="true" selectionMode="single"
+                                placeholder="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.TIMEFROM' | translate}}"
+                                [(ngModel)]="appointmentEdit.timeFrom"></p-calendar>
+                </div>
+
+                <div class="p-field p-col">
+                    <p-calendar #timeToInput="ngModel" id="timeToInput" name="timeToInput" dateFormat="dd.mm.yy" timeOnly="true" selectionMode="single"
+                                placeholder="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.TIMETO' | translate}}"
+                                [(ngModel)]="appointmentEdit.timeTo"></p-calendar>
+                </div>
+            </div>
+
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="contractorNameInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.REQUESTCONTRACTOR' | translate}}:</label>
+                    <input #contractorNameInput="ngModel" id="contractorNameInput" 
+                           name="contractorNameInput" type="text" pInputText 
+                           [(ngModel)]="appointmentEdit.requestedContractorName"
+                           [disabled]="appointmentEdit.changed">
+                </div>
+            </div>
+        </form>
+    </p-tabPanel>
+    <p-tabPanel header="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.APPOINTMENTLOCATION' | translate}}"
+                leftIcon="pi pi-map">
+        <form #appointmentLocationForm="ngForm">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="locationNameInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.LOCATIONNAME' | translate}}:</label>
+                    <input #locationNameInput="ngModel" id="locationNameInput" name="locationNameInput" type="text" pInputText [(ngModel)]="locationSearch.locationName">
+                </div>
+
+                <div class="p-field">
+                    <label for="cityNameInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.CITY' | translate}}:</label>
+                    <input #cityNameInput="ngModel" id="cityNameInput" name="cityNameInput" type="text" pInputText [(ngModel)]="locationSearch.locationCity">
+                </div>
+
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <div class="p-field">
+                            <label for="postalInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.POSTALCODE' | translate}}*:</label>
+                            <input #postalInput="ngModel" id="postalInput" name="postalInput" type="number" pInputText [(ngModel)]="locationSearch.locationPostalcode"
+                                   required>
+                            <small id="postalInput-mandatory" class="p-invalid" [ngStyle]="{'display': postalInput.invalid && (postalInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+                                {{'COMMON.MANDATORYFIELD' | translate}}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <div class="p-field">
+                            <label for="searchRadiusInput">{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.SEARCHRADIUS' | translate}}*:</label>
+                            <input #searchRadiusInput="ngModel" id="searchRadiusInput" name="searchRadiusInput" type="number" pInputText [(ngModel)]="locationSearch.locationSearchRadius"
+                                   required>
+                            <small id="searchRadiusInput-mandatory" class="p-invalid" [ngStyle]="{'display': searchRadiusInput.invalid && (searchRadiusInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+                                {{'COMMON.MANDATORYFIELD' | translate}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="card">
+            <div class="p-field">
+                <div class="searchButton">
+                    <button pButton type="button" label="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.SEARCH' | translate}}"
+                            class="p-button-primary p-mb-2" icon="pi pi-search-plus" iconPos="left"
+                            [disabled]="!appointmentLocationForm.valid || !selectedProject"
+                            (click)="onSearch()"></button>
+                </div>
+                <div class="p-field">
+                    <app-table #locationTable [columnDefinitions]="locationColumnDefinitions" [dataSource]="locationDataSource" [showLoadingSymbol]="locationOverviewIsLoading"
+                               scrollHeight="600px" [paginator]="true" [rows]="50" [rowsPerPageOptions]="[10,25,50, 100]" [editable]="false">
+                    </app-table>
+                </div>
+            </div>
+        </div>
+    </p-tabPanel>
+
+    <p-footer>
+        <div class="btn-align-right">
+            <div class="btn-group">
+                <button pButton type="button" label="{{'COMMON.PREVIOUS' | translate}}"
+                        class="p-button-primary p-mt-2" icon="pi pi-arrow-left" iconPos="left"
+                        (click)="onPrevious()"></button>
+
+                <button pButton type="button" label="{{'COMMON.NEXT' | translate}}"
+                        class="p-button-primary p-mt-2" icon="pi pi-arrow-right" iconPos="left"
+                        (click)="onNext()"></button>
+
+                <button pButton type="button" label="{{'COMMON.CANCEL' | translate}}"
+                        class="p-button-warning p-mt-2" icon="pi pi-times-circle" iconPos="left"
+                        (click)="onExit()"></button>
+
+                <button pButton type="button" label="{{'COMMON.SAVE' | translate}}"
+                        class="p-button-success p-mt-2" 
+                        [disabled]="!appointmentDetailForm.valid || !locationTable.selectedRow"
+                        icon="pi pi-save" iconPos="left"
+                        (click)="onFinish($event)"></button>
+            </div>
+        </div>
+    </p-footer>
+
+    <p-confirmDialog header="{{'COMMON.CANCEL' | translate}}" icon="pi pi-exclamation-triangle"
+                     acceptLabel="{{'COMMON.YES' | translate}}" rejectLabel="{{'COMMON.NO' | translate}}"
+                     message="{{'DASHBOARDMODULE.APPOINTMENTASSISTENTCOMPONENT.CANCELQUESTION' | translate}}"></p-confirmDialog>
+</p-tabView>

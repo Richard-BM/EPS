@@ -16,6 +16,7 @@ namespace EPS.models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
+        public byte[] Password { get; set; }
         public DateTime DateOfBirth { get; set; }
 
         public virtual ICollection<TblAppointment> TblAppointments { get; set; }
