@@ -69,6 +69,11 @@ export class PersonService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'text/plain',
@@ -101,6 +106,54 @@ export class PersonService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public personPersonsPersonIdDelete(personId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public personPersonsPersonIdDelete(personId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public personPersonsPersonIdDelete(personId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public personPersonsPersonIdDelete(personId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (personId === null || personId === undefined) {
+            throw new Error('Required parameter personId was null or undefined when calling personPersonsPersonIdDelete.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/Person/Persons/${encodeURIComponent(String(personId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param personId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public personPersonsPersonIdGet(personId: string, observe?: 'body', reportProgress?: boolean): Observable<PersonResponse>;
     public personPersonsPersonIdGet(personId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PersonResponse>>;
     public personPersonsPersonIdGet(personId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PersonResponse>>;
@@ -111,6 +164,11 @@ export class PersonService {
         }
 
         let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [

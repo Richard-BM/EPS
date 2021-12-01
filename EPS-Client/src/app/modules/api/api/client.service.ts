@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { ClientCreationRequest } from '../model/clientCreationRequest';
 import { ClientResponse } from '../model/clientResponse';
 import { ProblemDetails } from '../model/problemDetails';
 
@@ -63,6 +64,54 @@ export class ClientService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public clientClientsClientIdDelete(clientId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public clientClientsClientIdDelete(clientId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public clientClientsClientIdDelete(clientId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public clientClientsClientIdDelete(clientId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (clientId === null || clientId === undefined) {
+            throw new Error('Required parameter clientId was null or undefined when calling clientClientsClientIdDelete.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/Client/Clients/${encodeURIComponent(String(clientId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param clientId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public clientClientsClientIdGet(clientId: string, observe?: 'body', reportProgress?: boolean): Observable<ClientResponse>;
     public clientClientsClientIdGet(clientId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ClientResponse>>;
     public clientClientsClientIdGet(clientId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ClientResponse>>;
@@ -73,6 +122,11 @@ export class ClientService {
         }
 
         let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
@@ -112,6 +166,11 @@ export class ClientService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'text/plain',
@@ -129,6 +188,59 @@ export class ClientService {
 
         return this.httpClient.request<Array<ClientResponse>>('get',`${this.basePath}/Client/Clients`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public clientClientsPost(body?: ClientCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public clientClientsPost(body?: ClientCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public clientClientsPost(body?: ClientCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public clientClientsPost(body?: ClientCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('post',`${this.basePath}/Client/Clients`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

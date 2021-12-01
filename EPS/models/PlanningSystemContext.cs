@@ -27,7 +27,8 @@ namespace EPS.models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=127.0.0.1, 1234;Database=PlanningSystem;Trusted_Connection=True;User ID=EPS-API;Password=bpBtu7cMUURpD9hg;Integrated Security=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=127.0.0.1, 1234;Database=PlanningSystem;Trusted_Connection=false;User ID=EPS-API;Password=bpBtu7cMUURpD9hg;");
             }
         }
 
@@ -160,7 +161,6 @@ namespace EPS.models
                 entity.HasOne(d => d.IdClientNavigation)
                     .WithMany(p => p.TblProjects)
                     .HasForeignKey(d => d.IdClient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tbl_Project_tbl_Client");
             });
 

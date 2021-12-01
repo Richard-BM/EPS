@@ -1,0 +1,82 @@
+<form #personDetailForm="ngForm">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="firstNameInput">{{'ASSISTENTMODULE.PERSONCOMPONENT.FIRSTNAME' | translate}}*:</label>
+      <input #firstNameInput="ngModel" id="firstNameInput"
+             name="firstNameInput" type="text" pInputText
+             [(ngModel)]="personEdit.firstname"
+             required />
+    </div>
+    <small id="firstNameInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': firstNameInput.invalid && (firstNameInput.touched || personDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="lastNameInput">{{'ASSISTENTMODULE.PERSONCOMPONENT.LASTNAME' | translate}}*:</label>
+      <input #lastNameInput="ngModel" id="lastNameInput"
+             name="lastNameInput" type="text" pInputText
+             [(ngModel)]="personEdit.lastname" />
+    </div>
+    <small id="lastNameInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': lastNameInput.invalid && (lastNameInput.touched || personDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="emailInput">{{'ASSISTENTMODULE.PERSONCOMPONENT.EMAIL' | translate}}*:</label>
+      <input #emailInput="ngModel" id="emailInput"
+             name="emailInput" type="text" pInputText
+             [(ngModel)]="personEdit.email" />
+    </div>
+    <small id="emailInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': emailInput.invalid && (emailInput.touched || personDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="passwordInput">{{'ASSISTENTMODULE.PERSONCOMPONENT.PASSWORD' | translate}}*:</label>
+      <p-password #passwordInput="ngModel" id="passwordInput"
+                  name="passwordInput" type="text"
+                  [(ngModel)]="personEdit.password"
+                  [feedback]="false"
+                  [toggleMask]="true"></p-password>
+    </div>
+    <small id="passwordInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': passwordInput.invalid && (passwordInput.touched || personDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="dateOfBirthInput">{{'ASSISTENTMODULE.PERSONCOMPONENT.DATEOFBIRTH' | translate}}*:</label>
+      <p-calendar #dateOfBirthInput="ngModel" id="dateOfBirthInput"
+                  name="dateOfBirthInput" dateFormat="dd.mm.yy"
+                  selectionMode="single" required
+                  [(ngModel)]="personEdit.dateOfBirth"></p-calendar>
+    </div>
+    <small id="dateOfBirthInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': dateOfBirthInput.invalid && (dateOfBirthInput.touched || personDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+</form>
+
+<p-footer>
+  <div class="btn-align-right">
+    <div class="btn-group">
+      <button pButton type="button" label="{{'COMMON.CANCEL' | translate}}"
+              class="p-button-warning p-mt-2" icon="pi pi-times-circle" iconPos="left"
+              (click)="onExit()"></button>
+
+      <button pButton type="button" label="{{'COMMON.SAVE' | translate}}"
+              class="p-button-success p-mt-2"
+              [disabled]="!personDetailForm.valid"
+              icon="pi pi-save" iconPos="left"
+              (click)="onFinish()"></button>
+    </div>
+  </div>
+</p-footer>

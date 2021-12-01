@@ -24,7 +24,8 @@ import {ColorPickerModule} from 'primeng/colorpicker';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {DataViewModule} from 'primeng/dataview';
 import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import {FieldsetModule} from 'primeng/fieldset';
 import {FileUploadModule} from 'primeng/fileupload';
 import {FullCalendarModule} from 'primeng/fullcalendar';
@@ -74,7 +75,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
 import {TreeModule} from 'primeng/tree';
 import {TreeTableModule} from 'primeng/treetable';
-import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
 
 // Application Components
 import {AppComponent} from './app.component';
@@ -107,12 +108,19 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ConfirmationService } from 'primeng/api';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BreadcrumbService } from './services/breadcrumb.service';
+import { ClientComponent } from './modules/assistant/client/client.component';
+import { AssistentProjectComponent } from './modules/assistant/assistent-project/assistent-project.component';
+import { AssistentAppointmentComponent } from './modules/assistant/assistent-appointment/assistent-appointment.component';
+import { AssistentLocationComponent } from './modules/assistant/assistent-location/assistent-location.component';
+import { AssistentPersonComponent } from './modules/assistant/assistent-person/assistent-person.component';
+import { DatastoreService } from './services/datastore.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
+        DynamicDialogModule,
         AppCodeModule,
         HttpClientModule,
         BrowserAnimationsModule,
@@ -169,6 +177,7 @@ import { BreadcrumbService } from './services/breadcrumb.service';
         SlideMenuModule,
         SliderModule,
         SpinnerModule,
+
         SplitButtonModule,
         StepsModule,
         TableModule,
@@ -213,12 +222,17 @@ import { BreadcrumbService } from './services/breadcrumb.service';
         AppConfigComponent,
         AppBreadcrumbComponent,
         AppNotfoundComponent,
-        AppErrorComponent
+        AppErrorComponent,
+        ClientComponent,
+        AssistentProjectComponent,
+        AssistentAppointmentComponent,
+        AssistentLocationComponent,
+        AssistentPersonComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: UpdateDateHttpInterceptor, multi: true },
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        MenuService, BreadcrumbService, LanguageService, DatePipe, ConfirmationService
+      { provide: LocationStrategy, useClass: HashLocationStrategy },
+      MenuService, BreadcrumbService, LanguageService, DatePipe, ConfirmationService, DialogService, DatastoreService
     ],
     bootstrap: [AppComponent]
 })

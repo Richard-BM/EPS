@@ -53,26 +53,11 @@
   },
   "APPMODULE": {
     "MENUITEMS": {
-      "DASHBOARD": "Dashboard",
-      "APPOINTMENTS": "Termine",
-      "OVERVIEW": "Übersicht",
-      "IMPORT": "Importieren",
-      "QUESTIONNAIRES": "Fragebögen",
-      "CHECK": "Kontrolle",
-      "DESIGNER": "Designer",
-      "REPORTING": "Reporting",
-      "REPORTINGPORTAL": "Reporting Portal",
-      "LOCATIONS": "Märkte",
-      "STAFF": "Personal",
-      "ADMINISTRATION": "Verwaltung",
-      "CLIENTS": "Kunden",
-      "PROJECTS": "Projekte",
-      "SETTINGS": "Einstellungen"
+      "DASHBOARD": "Dashboard"
     },
     "TOPBAR": {
       "SIGNOUT": "Abmelden",
-      "WELCOME": "Willkommen",
-      "PROJECTMANAGER": "Projektmanager"
+      "WELCOME": "Willkommen"
     }
   },
   "BREADCRUMBS": {
@@ -94,47 +79,69 @@
     }
   },
   "DASHBOARDMODULE": {
-    "OVERVIEWCOMPONENT": {
-      "TITLE": "Terminübersicht",
-      "SELECTCLIENTS": "Kunden auswählen",
-      "SELECTEDCLIENTSCOUNT": "{0} Kunden ausgewählt",
-      "SELECTPROJECTS": "Projekte auswählen",
-      "SELECTEDPROJECTSCOUNT": "{0} Projekte ausgewählt",
-      "SELECTYEARS": "Jahre auswählen",
-      "SELECTEDYEARSCOUNT": "{0} Jahre ausgewählt",
-      "APPLYFILTER": "Filter anwenden",
-      "NUMBEROFAPPOINTMENTS": "Anzahl Termine:"
+    "CLIENTCOMPONENT": {
+      "COMPONENTNAME": "Kunden",
+      "CREATECLIENT": "Kunde anlegen",
+      "EDITCLIENT": "Kunde bearbeiten",
+      "DELETECLIENT": "Kunde löschen"
+    },
+    "PROJECTCOMPONENT": {
+      "COMPONENTNAME": "Projekte",
+      "CREATEPROJECT": "Projekt anlegen",
+      "EDITPROJECT": "Projekt bearbeiten",
+      "DELETEPROJECT": "Projekt entfernen"
     },
     "APPOINTMENTCOMPONENT": {
-      "CREATEAPPOINTMENT": "Termin erstellen",
+      "COMPONENTNAME": "Termine",
+      "CREATEAPPOINTMENT": "Termin anlegen",
       "EDITAPPOINTMENT": "Termin bearbeiten",
-      "DELETEAPPOINTMENT": "Termin entfernen",
-      "DELETEAPPOINTMENTQUESTION": "Durch das Löschen eines Termines werden sämtliche Informationen zu diesem Termin entfernt. Es können nur Termine mit dem Terminstatus 'Anfrage ausstehend' entfernt werden. Möchten Sie den aktuellen Termin wirklich löschen?",
-      "APPOINTMENTAUTHORIZATION": "Termin Berechtigung",
-      "APPOINTMENTDELETENOTAUTHORIZED": "Aufgrund des aktuellen Terminstatus, sind Sie sind nicht berechtigt diesen Termin zu bearbeiten oder zu entfernen."
+      "DELETEAPPOINTMENT": "Termin entfernen"
     },
-    "APPOINTMENTASSISTENTCOMPONENT": {
-      "APPOINTMENTDATA": "Termindaten",
-      "APPOINTMENTLOCATION": "Örtlichkeit",
-      "CREATIONTITLE": "Termin erstellen",
-      "EDITTITLE": "Termin bearbeiten",
-      "DATE": "Datum",
-      "TIMEFROM": "Uhrzeit von",
-      "TIMETO": "Uhrzeit bis",
-      "REQUESTCONTRACTOR": "Name des bevorzugten Auftragnehmers",
-      "SELECTPROJECT": "Projekt auswählen",
-      "PROJECT": "Projekt",
-      "CANCELQUESTION": "Möchten Sie den aktuellen Vorgang wirklich abbrechen? Ihre Eingaben wurden noch nicht gespeichert und gehen daher verloren.",
-      "LOCATIONNAME": "Örtlichkeitsname",
-      "CITY": "Ortsname",
+    "LOCATIONCOMPONENT": {
+      "COMPONENTNAME": "Örtlichkeiten",
+      "CREATELOCATION": "Örtlichkeit anlegen",
+      "EDITLOCATION": "Örtlichkeit bearbeiten",
+      "DELETELOCATION": "Örtlichkeit entfernen"
+    },
+    "PERSONCOMPONENT": {
+      "COMPONENTNAME": "Mitarbeiter",
+      "CREATEPERSON": "Mitarbeiter anlegen",
+      "EDITPERSON": "Mitarbeiter bearbeiten",
+      "DELETEPERSON": "Mitarbeiter entfernen"
+    }
+  },
+  "ASSISTENTMODULE": {
+    "CLIENTCOMPONENT": {
+      "NAME": "Name"
+    },
+    "PROJECTCOMPONENT": {
+      "SELECTCLIENT": "Kunde auswählen",
+      "CLIENT": "Kunde",
+      "NUMBER": "Projekt Nr.",
+      "DESCRIPTION": "Projekt Beschreibung"
+    },
+    "LOCATIONCOMPONENT": {
+      "NAME": "Name",
       "STREET": "Straße",
       "POSTALCODE": "Postleitzahl",
-      "SEARCHRADIUS": "Umkreis",
-      "SEARCH": "Suchen",
-      "APPOINTMENTMESSAGECREATEDTITLE": "Terminanlage",
-      "APPOINTMENTSUCCESSFULCREATED": "Der Termin wurde erfolgreich angelegt.",
-      "APPOINTMENTMESSAGEEDITTITLE": "Termin bearbeitet",
-      "APPOINTMENTSUCCESSFULEDITED": "Der Termin wurde erfolgreich bearbeitet."
+      "CITY": "Stadt"
+    },
+    "PERSONCOMPONENT": {
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "EMAIL": "E-Mail adresse",
+      "PASSWORD": "Passwort",
+      "DATEOFBIRTH": "Geburtsdatum"
+    },
+    "APPOINTMENTCOMPONENT": {
+      "SELECTPERSON": "Person auswählen",
+      "PERSON": "Arbeiter",
+      "SELECTPROJECT": "Projekt auswählen",
+      "PROJECT": "Projekt",
+      "SELECTLOCATION": "Örtlichkeit auswählen",
+      "LOCATION": "Örtlichkeit",
+      "TIMEFROM": "Von",
+      "TIMETO": "Bis"
     }
   },
   "COMMONUIMODULE": {

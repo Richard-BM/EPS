@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { LocationCreationRequest } from '../model/locationCreationRequest';
 import { LocationResponse } from '../model/locationResponse';
 import { ProblemDetails } from '../model/problemDetails';
 
@@ -69,6 +70,11 @@ export class LocationService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'text/plain',
@@ -101,6 +107,54 @@ export class LocationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public locationLocationsLocationIdDelete(locationId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public locationLocationsLocationIdDelete(locationId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public locationLocationsLocationIdDelete(locationId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public locationLocationsLocationIdDelete(locationId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (locationId === null || locationId === undefined) {
+            throw new Error('Required parameter locationId was null or undefined when calling locationLocationsLocationIdDelete.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/Location/Locations/${encodeURIComponent(String(locationId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param locationId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public locationLocationsLocationIdGet(locationId: string, observe?: 'body', reportProgress?: boolean): Observable<LocationResponse>;
     public locationLocationsLocationIdGet(locationId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LocationResponse>>;
     public locationLocationsLocationIdGet(locationId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LocationResponse>>;
@@ -111,6 +165,11 @@ export class LocationService {
         }
 
         let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
@@ -129,6 +188,59 @@ export class LocationService {
 
         return this.httpClient.request<LocationResponse>('get',`${this.basePath}/Location/Locations/${encodeURIComponent(String(locationId))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public locationLocationsPost(body?: LocationCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public locationLocationsPost(body?: LocationCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public locationLocationsPost(body?: LocationCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public locationLocationsPost(body?: LocationCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('post',`${this.basePath}/Location/Locations`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

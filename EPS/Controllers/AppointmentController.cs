@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using EPS.Dtos.Response;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using EPS.Dtos.Request;
 
 namespace EPS.Controllers
 {
@@ -69,6 +70,54 @@ namespace EPS.Controllers
                 return NotFound("A appointment with the specified Id could not be found");
             else
                 return Ok(_mapper.Map<AppointmentResponse>(appointment));
+        }
+
+        /// <summary>
+        /// Creates a new appointment
+        /// </summary>
+        /// <remarks>Creates a new appointment</remarks>
+        /// <param name="appointmentCreationRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/Appointment/Appointments/")]
+        [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
+        public async Task<IActionResult> Create(AppointmentCreationRequest appointmentCreationRequest)
+        {
+            TblAppointment appointment = new TblAppointment
+            {
+                IdAppointment = Guid.NewGuid(),
+                IdPerson = appointmentCreationRequest.AssignedPersonId,
+                IdLocation = appointmentCreationRequest.AssignedLocationId,
+                IdProject = appointmentCreationRequest.AssignedProjectId,
+                StartDate = appointmentCreationRequest.TimeFrom,
+                EndDate = appointmentCreationRequest.TimeTo,
+            };
+
+            await _planningSystemContext.TblAppointments.AddAsync(appointment);
+            await _planningSystemContext.SaveChangesAsync();
+            return Created("", appointment.IdAppointment);
+        }
+
+        /// <summary>
+        /// Deletes a appointment with the given appointmentId
+        /// </summary>
+        /// <remarks>Deletes a appointment with the given appointmentId</remarks>
+        /// <param name="appointmentId">The appointmentId from the appointment to be deleted</param>
+        /// <returns></returns>
+        [HttpDelete("/Appointment/Appointments/{appointmentId}")]
+        [SwaggerResponse(204, "The appointment was successfully deleted", typeof(void))]
+        [SwaggerResponse(404, "The appointment was not found. Maybe it's already deleted.", typeof(void))]
+        public async Task<IActionResult> Delete(System.Guid appointmentId)
+        {
+            TblAppointment appointment = await _planningSystemContext.TblAppointments.Where(x => x.IdAppointment == appointmentId).FirstOrDefaultAsync();
+
+            if (appointment == null)
+                return NotFound("The appointment was not found. Maybe it's already deleted");
+            else
+            {
+                _planningSystemContext.TblAppointments.Remove(appointment);
+                await _planningSystemContext.SaveChangesAsync();
+                return NoContent();
+            }
         }
     }
 }

@@ -19,8 +19,7 @@
     },
     "TOPBAR": {
       "SIGNOUT": "Sign out",
-      "WELCOME": "Welcome",
-      "PROJECTMANAGER": "Projectmanager"
+      "WELCOME": "Welcome"
     }
   },
   "BREADCRUMBS": {

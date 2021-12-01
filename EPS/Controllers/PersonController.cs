@@ -64,5 +64,33 @@ namespace EPS.Controllers
             else
                 return Ok(_mapper.Map<PersonResponse>(person));
         }
+
+        /// <summary>
+        /// Deletes a person with the given personId
+        /// </summary>
+        /// <remarks>Deletes a person with the given locationId</remarks>
+        /// <param name="personId">The personId from the person to be deleted</param>
+        /// <returns></returns>
+        [HttpDelete("/Person/Persons/{personId}")]
+        [SwaggerResponse(204, "The person was successfully deleted", typeof(void))]
+        [SwaggerResponse(404, "The person was not found. Maybe it's already deleted.", typeof(void))]
+        public async Task<IActionResult> Delete(System.Guid personId)
+        {
+            TblPerson person = await _planningSystemContext.TblPeople.Where(x => x.IdPerson == personId).FirstOrDefaultAsync();
+
+            if (person == null)
+                return NotFound("The person was not found. Maybe it's already deleted");
+            else
+            {
+                List<TblAppointment> appointments = await _planningSystemContext.TblAppointments.Where(x => x.IdPerson == personId).ToListAsync();
+
+                foreach (TblAppointment appointment in appointments)
+                    appointment.IdPerson = null;
+
+                _planningSystemContext.TblPeople.Remove(person);
+                await _planningSystemContext.SaveChangesAsync();
+                return NoContent();
+            }
+        }
     }
 }

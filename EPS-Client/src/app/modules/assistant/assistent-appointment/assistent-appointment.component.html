@@ -1,0 +1,91 @@
+<form #appointmentDetailForm="ngForm">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="personInput">{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.SELECTPERSON' | translate}}:*</label>
+      <p-dropdown #personInput="ngModel" id="personInput" name="personInput" [options]="persons" optionLabel="eMail" [(ngModel)]="selectedPerson" [filter]="false"
+                  placeholder="{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.PERSON' | translate}}"
+                  emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"
+                  [autoDisplayFirst]="false" required></p-dropdown>
+      <small id="personInput-mandatory" class="p-invalid"
+             [ngStyle]="{'display': personInput.invalid && (personInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+        {{'COMMON.MANDATORYFIELD' | translate}}
+      </small>
+    </div>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="projectInput">{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.SELECTPROJECT' | translate}}:*</label>
+      <p-dropdown #projectInput="ngModel" id="projectInput" name="projectInput" [options]="projects" optionLabel="projectName" [(ngModel)]="selectedProject" [filter]="false"
+                  placeholder="{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.PROJECT' | translate}}"
+                  emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"
+                  [autoDisplayFirst]="false" required></p-dropdown>
+      <small id="projectInput-mandatory" class="p-invalid"
+             [ngStyle]="{'display': projectInput.invalid && (projectInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+        {{'COMMON.MANDATORYFIELD' | translate}}
+      </small>
+    </div>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="locationInput">{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.SELECTLOCATION' | translate}}:*</label>
+      <p-dropdown #locationInput="ngModel" id="locationInput" name="locationInput" [options]="locations" optionLabel="name" [(ngModel)]="selectedLocation" [filter]="false"
+                  placeholder="{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.LOCATION' | translate}}"
+                  emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"
+                  [autoDisplayFirst]="false" required></p-dropdown>
+      <small id="locationInput-mandatory" class="p-invalid"
+             [ngStyle]="{'display': locationInput.invalid && (locationInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+        {{'COMMON.MANDATORYFIELD' | translate}}
+      </small>
+    </div>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="timeFromInput">{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.TIMEFROM' | translate}}*:</label>
+      <p-calendar #timeFromInput="ngModel" id="timeFromInput"
+                  name="timeFromInput" dateFormat="dd.mm.yy"
+                  selectionMode="single"
+                  required
+                  [showTime]="true" hourFormat="24" [showWeek]="true"
+                  [showIcon]="true"
+                  [touchUI]="true"
+                  [(ngModel)]="appointmentEdit.timeFrom"></p-calendar>
+    </div>
+    <small id="timeFromInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': timeFromInput.invalid && (timeFromInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="timeToInput">{{'ASSISTENTMODULE.APPOINTMENTCOMPONENT.TIMETO' | translate}}*:</label>
+      <p-calendar #timeToInput="ngModel" id="timeToInput"
+                  name="timeToInput" dateFormat="dd.mm.yy"
+                  selectionMode="single"
+                  required
+                  [showTime]="true" hourFormat="24" [showWeek]="true"
+                  [showIcon]="true"
+                  [touchUI]="true"
+                  [(ngModel)]="appointmentEdit.timeTo"></p-calendar>
+    </div>
+    <small id="timeToInput-mandatory" class="p-invalid"
+           [ngStyle]="{'display': timeToInput.invalid && (timeToInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+</form>
+
+<p-footer>
+  <div class="btn-align-right">
+    <div class="btn-group">
+      <button pButton type="button" label="{{'COMMON.CANCEL' | translate}}"
+              class="p-button-warning p-mt-2" icon="pi pi-times-circle" iconPos="left"
+              (click)="onExit()"></button>
+
+      <button pButton type="button" label="{{'COMMON.SAVE' | translate}}"
+              class="p-button-success p-mt-2"
+              [disabled]="!appointmentDetailForm.valid"
+              icon="pi pi-save" iconPos="left"
+              (click)="onFinish()"></button>
+    </div>
+  </div>
+</p-footer>

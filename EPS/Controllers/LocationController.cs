@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using EPS.Dtos.Request;
 using EPS.Dtos.Response;
 using EPS.models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -64,6 +64,59 @@ namespace EPS.Controllers
                 return NotFound("A location with the specified Id could not be found");
             else
                 return Ok(_mapper.Map<LocationResponse>(location));
+        }
+
+        /// <summary>
+        /// Creates a new location
+        /// </summary>
+        /// <remarks>Creates a new location</remarks>
+        /// <param name="locationCreationRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/Location/Locations/")]
+        [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
+        public async Task<IActionResult> Create(LocationCreationRequest locationCreationRequest)
+        {
+            TblLocation location = new TblLocation
+            {
+                IdLocation = Guid.NewGuid(),
+                Name = locationCreationRequest.Name,
+                Street = locationCreationRequest.Street,
+                City = locationCreationRequest.City,
+                Postalcode = locationCreationRequest.Postalcode
+            };
+
+            await _planningSystemContext.TblLocations.AddAsync(location);
+            await _planningSystemContext.SaveChangesAsync();
+            return Created("", location.IdLocation);
+        }
+
+
+        /// <summary>
+        /// Deletes a location with the given locationId
+        /// </summary>
+        /// <remarks>Deletes a location with the given locationId</remarks>
+        /// <param name="locationId">The locationId from the location to be deleted</param>
+        /// <returns></returns>
+        [HttpDelete("/Location/Locations/{locationId}")]
+        [SwaggerResponse(204, "The location was successfully deleted", typeof(void))]
+        [SwaggerResponse(404, "The location was not found. Maybe it's already deleted.", typeof(void))]
+        public async Task<IActionResult> Delete(System.Guid locationId)
+        {
+            TblLocation location = await _planningSystemContext.TblLocations.Where(x => x.IdLocation == locationId).FirstOrDefaultAsync();
+
+            if (location == null)
+                return NotFound("The location was not found. Maybe it's already deleted");
+            else
+            {
+                List<TblAppointment> appointments = await _planningSystemContext.TblAppointments.Where(x => x.IdLocation == locationId).ToListAsync();
+
+                foreach (TblAppointment appointment in appointments)
+                    appointment.IdLocation = null;
+
+                _planningSystemContext.TblLocations.Remove(location);
+                await _planningSystemContext.SaveChangesAsync();
+                return NoContent();
+            }
         }
     }
 }

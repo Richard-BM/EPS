@@ -1,0 +1,29 @@
+<form #clientDetailForm="ngForm">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="nameInput">{{'ASSISTENTMODULE.CLIENTCOMPONENT.NAME' | translate}}:</label>
+      <input #nameInput="ngModel" id="nameInput"
+             name="nameInput" type="text" pInputText
+             [(ngModel)]="clientEdit.name" />
+    </div>
+    <small id="nameInput-mandatory" class="p-invalid" [ngStyle]="{'display': nameInput.invalid && (nameInput.touched || clientDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+</form>
+
+<p-footer>
+  <div class="btn-align-right">
+    <div class="btn-group">
+      <button pButton type="button" label="{{'COMMON.CANCEL' | translate}}"
+              class="p-button-warning p-mt-2" icon="pi pi-times-circle" iconPos="left"
+              (click)="onExit()"></button>
+
+      <button pButton type="button" label="{{'COMMON.SAVE' | translate}}"
+              class="p-button-success p-mt-2"
+              [disabled]="!clientDetailForm.valid"
+              icon="pi pi-save" iconPos="left"
+              (click)="onFinish()"></button>
+    </div>
+  </div>
+</p-footer>

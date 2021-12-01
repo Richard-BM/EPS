@@ -21,11 +21,21 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { OverviewComponent } from './components/overview/overview.component';
+import { AppointmentComponent } from './components/appointment/appointment.component';
+import { ClientsComponent } from './components/clients/clients.component';
+import { LocationsComponent } from './components/locations/locations.component';
+import { PersonsComponent } from './components/persons/persons.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 
 @NgModule({
     declarations: [
-    OverviewComponent],
+    OverviewComponent,
+    AppointmentComponent,
+    ClientsComponent,
+    LocationsComponent,
+    PersonsComponent,
+    ProjectsComponent],
     entryComponents: [
     ],
   imports: [
