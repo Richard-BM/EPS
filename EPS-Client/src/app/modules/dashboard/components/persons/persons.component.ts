@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { repeat } from 'rxjs/operators';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { EditServiceService } from '../../../../services/editService.service';
 import { AppointmentService, PersonResponse, PersonService } from '../../../api';
 import { AssistentPersonComponent } from '../../../assistant/assistent-person/assistent-person.component';
 import { TableComponent } from '../../../commonUi/components/table/table.component';
@@ -22,7 +23,7 @@ export class PersonsComponent implements OnInit {
   @ViewChild('personTable') personTable: TableComponent;
 
   constructor(private personService: PersonService, private datePipe: DatePipe, private translateService: TranslateService
-    , public dialogService: DialogService, private dataStoreService: DatastoreService) { }
+    , public dialogService: DialogService, private dataStoreService: DatastoreService, private editService: EditServiceService) { }
 
   public personOverviewIsLoading = false;
   public personsColumnDefinitions: ColumnDefinition[] = [];
@@ -68,8 +69,22 @@ export class PersonsComponent implements OnInit {
   }
 
   public onPersonCreate() {
+    this.editService.setPersonData(null);
+
     this.ref = this.dialogService.open(AssistentPersonComponent, {
       header: this.translateService.instant("DASHBOARDMODULE.PERSONCOMPONENT.CREATEPERSON"),
+      width: '50%',
+      contentStyle: { "max-height": "600px", "overflow": "auto" },
+      baseZIndex: 10000
+    });
+  }
+
+  public onPersonEdit() {
+    this.editService.setPersonData(this.personDataSource.find(x => x.id == this.personTable.selectedRow.id));
+    this.editService.personEdit.changed = true;
+
+    this.ref = this.dialogService.open(AssistentPersonComponent, {
+      header: this.translateService.instant("DASHBOARDMODULE.PERSONCOMPONENT.EDITPERSON"),
       width: '50%',
       contentStyle: { "max-height": "600px", "overflow": "auto" },
       baseZIndex: 10000

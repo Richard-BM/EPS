@@ -10,6 +10,7 @@ using EPS.Dtos.Response;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using EPS.Dtos.Request;
 
 namespace EPS.Controllers
 {
@@ -64,6 +65,36 @@ namespace EPS.Controllers
             else
                 return Ok(_mapper.Map<PersonResponse>(person));
         }
+
+        /// <summary>
+        /// Updates a person
+        /// </summary>
+        /// <remarks>Updates a person</remarks>
+        /// <param name="personId">The personId from the person</param>
+        /// <param name="personEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Person/Persons/{personId}")]
+        [SwaggerResponse(204, "The person was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The person with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid personId, PersonEditRequest PersonEditRequest)
+        {
+            TblPerson person = await _planningSystemContext.TblPeople.Where(x => x.IdPerson == personId).FirstOrDefaultAsync();
+
+            if (person == null)
+                return NotFound("invalid locationId");
+            else
+            {
+                person.Email = PersonEditRequest.Email;
+                person.Firstname = PersonEditRequest.firstname;
+                person.Lastname = PersonEditRequest.lastname;
+                person.DateOfBirth = PersonEditRequest.DateOfBirth;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
+
 
         /// <summary>
         /// Deletes a person with the given personId

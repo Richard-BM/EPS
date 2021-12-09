@@ -86,6 +86,31 @@ namespace EPS.Controllers
             return Created("", client.IdClient);
         }
 
+        /// <summary>
+        /// Updates a client
+        /// </summary>
+        /// <remarks>Updates a client</remarks>
+        /// <param name="clientId">The clientId from the client</param>
+        /// <param name="clientEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Client/Clients/{clientId}")]
+        [SwaggerResponse(204, "The client was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The client with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid clientId, ClientEditRequest clientEditRequest)
+        {
+            TblClient client = await _planningSystemContext.TblClients.Where(x => x.IdClient == clientId).FirstOrDefaultAsync();
+
+            if (client == null)
+                return NotFound("invalid clientId");
+            else
+            {
+                client.Name = clientEditRequest.Name;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
 
         /// <summary>
         /// Deletes a client with the given clientId

@@ -98,6 +98,36 @@ namespace EPS.Controllers
         }
 
         /// <summary>
+        /// Updates a appointment
+        /// </summary>
+        /// <remarks>Updates a appointment</remarks>
+        /// <param name="appointmentId">The appointmentId from the appointment</param>
+        /// <param name="appointmentEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Appointment/Appointments/{appointmentId}")]
+        [SwaggerResponse(204, "The appointment was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The appointment with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid appointmentId, AppointmentEditRequest appointmentEditRequest)
+        {
+            TblAppointment appointment = await _planningSystemContext.TblAppointments.Where(x => x.IdAppointment == appointmentId).FirstOrDefaultAsync();
+
+            if (appointment == null)
+                return NotFound("invalid appointmentId");
+            else
+            {
+                appointment.IdProject = appointmentEditRequest.AssignedProjectId;
+                appointment.IdPerson = appointmentEditRequest.AssignedPersonId;
+                appointment.IdLocation = appointmentEditRequest.AssignedLocationId;
+                appointment.StartDate = appointmentEditRequest.TimeFrom;
+                appointment.EndDate = appointmentEditRequest.TimeTo;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
+
+        /// <summary>
         /// Deletes a appointment with the given appointmentId
         /// </summary>
         /// <remarks>Deletes a appointment with the given appointmentId</remarks>

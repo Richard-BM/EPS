@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppMainComponent } from '../main/app.main.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';

@@ -8,6 +8,11 @@
           <button pButton type="button" label="{{'DASHBOARDMODULE.PERSONCOMPONENT.CREATEPERSON' | translate}}"
                   class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
                   (click)="onPersonCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.PERSONCOMPONENT.EDITPERSON' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!personTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onPersonEdit()"></button>
           <button pButton type="button" label="{{'DASHBOARDMODULE.PERSONCOMPONENT.DELETEPERSON' | translate}}"
                   class="btn p-mt-2 p-button-danger"
                   [disabled]="!personTable.selectedRow"

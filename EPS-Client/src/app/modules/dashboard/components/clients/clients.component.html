@@ -8,6 +8,11 @@
           <button pButton type="button" label="{{'DASHBOARDMODULE.CLIENTCOMPONENT.CREATECLIENT' | translate}}"
                   class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
                   (click)="onClientCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.CLIENTCOMPONENT.EDITCLIENT' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!clientTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onClientEdit()"></button>
           <button pButton type="button" label="{{'DASHBOARDMODULE.CLIENTCOMPONENT.DELETECLIENT' | translate}}"
                   class="btn p-mt-2 p-button-danger"
                   [disabled]="!clientTable.selectedRow"

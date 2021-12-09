@@ -8,6 +8,11 @@
           <button pButton type="button" label="{{'DASHBOARDMODULE.APPOINTMENTCOMPONENT.CREATEAPPOINTMENT' | translate}}"
                   class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
                   (click)="onAppointmentCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.PROJECTCOMPONENT.EDITPROJECT' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!appointmentTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onAppointmentEdit()"></button>
           <button pButton type="button" label="{{'DASHBOARDMODULE.APPOINTMENTCOMPONENT.DELETEAPPOINTMENT' | translate}}"
                   class="btn p-mt-2 p-button-danger"
                   [disabled]="!appointmentTable.selectedRow"

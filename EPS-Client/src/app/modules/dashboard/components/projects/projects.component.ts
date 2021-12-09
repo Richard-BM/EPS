@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { EditServiceService } from '../../../../services/editService.service';
 import { ClientService, ProjectResponse, ProjectService } from '../../../api';
 import { AssistentProjectComponent } from '../../../assistant/assistent-project/assistent-project.component';
 import { TableComponent } from '../../../commonUi/components/table/table.component';
@@ -18,7 +19,7 @@ import { DisplayProjects } from '../../interfaces/DisplayProjects.Interface';
 export class ProjectsComponent implements OnInit {
 
   constructor(private clientService: ClientService, private projectService: ProjectService, private translateService: TranslateService
-    , public dialogService: DialogService, private dataStoreService: DatastoreService) { }
+    , public dialogService: DialogService, private dataStoreService: DatastoreService, private editService: EditServiceService) { }
 
   @ViewChild('projectTable') projectTable: TableComponent;
 
@@ -31,7 +32,7 @@ export class ProjectsComponent implements OnInit {
     this.loadProjectDataSource();
 
     this.dataStoreService.dataChange.subscribe(response => {
-      this.loadAppointmentDataSource();
+      this.loadProjectDataSource();
     });
   }
 
@@ -54,7 +55,7 @@ export class ProjectsComponent implements OnInit {
   private createProjectDisplayObject(projectResponse: ProjectResponse) {
     let displayProject: DisplayProjects = {
       id: projectResponse.projectId,
-      clientName: projectResponse.clientResponse?.name,
+      clientName: projectResponse.clientResponse?.name ? projectResponse.clientResponse?.name : "",
       name: projectResponse.projectName,
       number: projectResponse.projectNumber,
       description: projectResponse.projectDescription
@@ -64,8 +65,22 @@ export class ProjectsComponent implements OnInit {
   }
 
   public onProjectCreate() {
+    this.editService.setProjectData(null);
+
     this.ref = this.dialogService.open(AssistentProjectComponent, {
       header: this.translateService.instant("DASHBOARDMODULE.PROJECTCOMPONENT.CREATEPROJECT"),
+      width: '50%',
+      contentStyle: { "max-height": "600px", "overflow": "auto" },
+      baseZIndex: 10000
+    });
+  }
+
+  public onProjectEdit() {
+    this.editService.setProjectData(this.projectDataSource.find(x => x.id == this.projectTable.selectedRow.id));
+    this.editService.projectEdit.changed = true;
+
+    this.ref = this.dialogService.open(AssistentProjectComponent, {
+      header: this.translateService.instant("DASHBOARDMODULE.PROJECTCOMPONENT.EDITPROJECT"),
       width: '50%',
       contentStyle: { "max-height": "600px", "overflow": "auto" },
       baseZIndex: 10000

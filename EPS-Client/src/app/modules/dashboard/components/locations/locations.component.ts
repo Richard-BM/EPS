@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { EditServiceService } from '../../../../services/editService.service';
 import { LocationResponse, LocationService } from '../../../api';
 import { AssistentLocationComponent } from '../../../assistant/assistent-location/assistent-location.component';
 import { TableComponent } from '../../../commonUi/components/table/table.component';
@@ -18,7 +19,7 @@ import { DisplayLocation } from '../../interfaces/DisplayLocation.Interface';
 export class LocationsComponent implements OnInit {
 
   constructor(private locationService: LocationService, private translateService: TranslateService
-    , public dialogService: DialogService, private dataStoreService: DatastoreService) { }
+    , public dialogService: DialogService, private dataStoreService: DatastoreService, private editService: EditServiceService) { }
 
 
   public locationOverviewIsLoading = false;
@@ -65,8 +66,22 @@ export class LocationsComponent implements OnInit {
   }
 
   public onLocationCreate() {
+    this.editService.setLocationData(null);
+
     this.ref = this.dialogService.open(AssistentLocationComponent, {
       header: this.translateService.instant("DASHBOARDMODULE.LOCATIONCOMPONENT.CREATELOCATION"),
+      width: '50%',
+      contentStyle: { "max-height": "600px", "overflow": "auto" },
+      baseZIndex: 10000
+    });
+  }
+
+  public onLocationEdit() {
+    this.editService.setLocationData(this.locationDataSource.find(x => x.id == this.locationTable.selectedRow.id));
+    this.editService.locationEdit.changed = true;
+
+    this.ref = this.dialogService.open(AssistentLocationComponent, {
+      header: this.translateService.instant("DASHBOARDMODULE.LOCATIONCOMPONENT.EDITLOCATION"),
       width: '50%',
       contentStyle: { "max-height": "600px", "overflow": "auto" },
       baseZIndex: 10000

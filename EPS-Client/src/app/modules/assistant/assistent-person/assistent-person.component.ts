@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DatastoreService } from '../../../services/datastore.service';
-import { AuthenticationService, PersonService, RegisterRequest } from '../../api';
+import { EditServiceService } from '../../../services/editService.service';
+import { AuthenticationService, PersonEditRequest, PersonService, RegisterRequest } from '../../api';
 import { DisplayPerson } from '../../dashboard/interfaces/DisplayPerson.Interface';
 
 @Component({
@@ -12,7 +13,8 @@ import { DisplayPerson } from '../../dashboard/interfaces/DisplayPerson.Interfac
 })
 export class AssistentPersonComponent implements OnInit {
 
-  constructor(public ref: DynamicDialogRef, public authService: AuthenticationService, private dataStoreService: DatastoreService) { }
+  constructor(public ref: DynamicDialogRef, public authService: AuthenticationService, private dataStoreService: DatastoreService
+    , private editService: EditServiceService, private personService: PersonService) { }
 
   @ViewChild('personDetailForm') personDetailForm: NgForm;
 
@@ -20,29 +22,50 @@ export class AssistentPersonComponent implements OnInit {
   public personEdit: DisplayPerson
 
   ngOnInit(): void {
-    this.personEdit = {
-      id: null,
-      firstname: "",
-      lastname: "",
-      password: "",
-      dateOfBirth: "",
-      email:""
+    this.loadData();
+  }
+
+  private loadData() {
+    this.personEdit = this.editService.personEdit;
+
+    if (this.personEdit.isNew) {
+      this.personEdit.firstname = "";
+      this.personEdit.lastname = "";
+      this.personEdit.email = "";
+      this.personEdit.password = "";
+      this.personEdit.dateOfBirth = "";
     }
   }
 
   public onFinish() {
-    let newPerson: RegisterRequest = {
-      firstname: this.personEdit.firstname,
-      lastname: this.personEdit.lastname,
-      email: this.personEdit.email,
-      password: this.personEdit.password,
-      dateOfBirth: new Date(this.personEdit.dateOfBirth)
-    }
+    if (this.personEdit.changed) {
+      let changedPerson: PersonEditRequest = {
+        firstname: this.personEdit.firstname,
+        lastname: this.personEdit.lastname,
+        email: this.personEdit.email,
+        dateOfBirth: new Date(this.personEdit.dateOfBirth)
+      }
 
-    this.authService.authenticationRegisterPost(newPerson).subscribe(clientResponse => {
-      this.dataStoreService.dataChanged(clientResponse);
-      this.ref.close();
-    });
+      this.personService.personPersonsLocationIdPut(this.personEdit.id, changedPerson).subscribe(clientResponse => {
+        this.dataStoreService.dataChanged(clientResponse);
+        this.ref.close();
+      });
+
+
+    } else if (this.personEdit.isNew) {
+      let newPerson: RegisterRequest = {
+        firstname: this.personEdit.firstname,
+        lastname: this.personEdit.lastname,
+        email: this.personEdit.email,
+        password: this.personEdit.password,
+        dateOfBirth: new Date(this.personEdit.dateOfBirth)
+      }
+
+      this.authService.authenticationRegisterPost(newPerson).subscribe(clientResponse => {
+        this.dataStoreService.dataChanged(clientResponse);
+        this.ref.close();
+      });
+    }
   }
 
   public onExit() {

@@ -48,7 +48,7 @@
                   [showTime]="true" hourFormat="24" [showWeek]="true"
                   [showIcon]="true"
                   [touchUI]="true"
-                  [(ngModel)]="appointmentEdit.timeFrom"></p-calendar>
+                  [(ngModel)]="appointmentTimeFrom"></p-calendar>
     </div>
     <small id="timeFromInput-mandatory" class="p-invalid"
            [ngStyle]="{'display': timeFromInput.invalid && (timeFromInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">
@@ -65,7 +65,7 @@
                   [showTime]="true" hourFormat="24" [showWeek]="true"
                   [showIcon]="true"
                   [touchUI]="true"
-                  [(ngModel)]="appointmentEdit.timeTo"></p-calendar>
+                  [(ngModel)]="appointmentTimeTo"></p-calendar>
     </div>
     <small id="timeToInput-mandatory" class="p-invalid"
            [ngStyle]="{'display': timeToInput.invalid && (timeToInput.touched || appointmentDetailForm.submitted) ? 'inline' : 'none'}">

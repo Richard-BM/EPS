@@ -8,6 +8,11 @@
           <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.CREATELOCATION' | translate}}"
                   class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
                   (click)="onLocationCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.EDITLOCATION' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!locationTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onLocationEdit()"></button>
           <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.DELETELOCATION' | translate}}"
                   class="btn p-mt-2 p-button-danger"
                   [disabled]="!locationTable.selectedRow"

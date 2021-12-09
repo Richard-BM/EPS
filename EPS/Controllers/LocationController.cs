@@ -90,6 +90,35 @@ namespace EPS.Controllers
             return Created("", location.IdLocation);
         }
 
+        /// <summary>
+        /// Updates a location
+        /// </summary>
+        /// <remarks>Updates a location</remarks>
+        /// <param name="locationId">The locationId from the location</param>
+        /// <param name="locationEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Location/Locations/{locationId}")]
+        [SwaggerResponse(204, "The location was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The location with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid locationId, LocationEditRequest locationEditRequest)
+        {
+            TblLocation location = await _planningSystemContext.TblLocations.Where(x => x.IdLocation == locationId).FirstOrDefaultAsync();
+
+            if (location == null)
+                return NotFound("invalid locationId");
+            else
+            {
+                location.Name = locationEditRequest.Name;
+                location.Street = locationEditRequest.Street;
+                location.Postalcode = locationEditRequest.Postalcode;
+                location.City = locationEditRequest.City;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
+
 
         /// <summary>
         /// Deletes a location with the given locationId

@@ -43,6 +43,7 @@
                   name="passwordInput" type="text"
                   [(ngModel)]="personEdit.password"
                   [feedback]="false"
+                  [disabled]="personEdit.changed"
                   [toggleMask]="true"></p-password>
     </div>
     <small id="passwordInput-mandatory" class="p-invalid"

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 					<div class="layout-topbar-logo-wrapper">
 						<a href="#" class="layout-topbar-logo">
 							<img src="assets/layout/images/logo-pulse.png" alt="mirage-layout" />
-							<span class="app-name">Agency Pulse</span>
+							<span class="app-name">EPS</span>
 						</a>
 					</div>
 

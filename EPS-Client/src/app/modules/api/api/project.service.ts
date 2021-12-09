@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { ProblemDetails } from '../model/problemDetails';
 import { ProjectCreationRequest } from '../model/projectCreationRequest';
+import { ProjectEditRequest } from '../model/projectEditRequest';
 import { ProjectResponse } from '../model/projectResponse';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -198,6 +199,64 @@ export class ProjectService {
 
         return this.httpClient.request<Array<ProjectResponse>>('get',`${this.basePath}/Project/Project/${encodeURIComponent(String(projectId))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param projectId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling projectProjectProjectIdPut.');
+        }
+
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('put',`${this.basePath}/Project/Project/${encodeURIComponent(String(projectId))}`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -95,7 +95,34 @@ namespace EPS.Controllers
             return Created("", project.IdProject);
         }
 
+        /// <summary>
+        /// Updates a project
+        /// </summary>
+        /// <remarks>Updates a project</remarks>
+        /// <param name="projectId">The projectId from the project</param>
+        /// <param name="projectEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Project/Project/{projectId}")]
+        [SwaggerResponse(204, "The project was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The project with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid projectId, ProjectEditRequest projectEditRequest)
+        {
+            TblProject project = await _planningSystemContext.TblProjects.Where(x => x.IdProject == projectId).FirstOrDefaultAsync();
 
+            if (project == null)
+                return NotFound("invalid projectId");
+            else
+            {
+                project.IdClient = projectEditRequest.ClientId;
+                project.ProjectName = projectEditRequest.Name;
+                project.ProjectNumber = projectEditRequest.Number;
+                project.ProjectDescription = projectEditRequest.Description;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
 
         /// <summary>
         /// Deletes a project with the given projectId

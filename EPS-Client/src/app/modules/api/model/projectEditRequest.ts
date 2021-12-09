@@ -10,10 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface AppointmentCreationRequest { 
-    assignedPersonId: string;
-    assignedLocationId: string;
-    assignedProjectId: string;
-    timeFrom: Date;
-    timeTo: Date;
+export interface ProjectEditRequest { 
+    name?: string;
+    clientId?: string;
+    number?: string;
+    description?: string;
 }

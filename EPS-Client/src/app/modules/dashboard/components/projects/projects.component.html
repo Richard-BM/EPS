@@ -8,6 +8,11 @@
           <button pButton type="button" label="{{'DASHBOARDMODULE.PROJECTCOMPONENT.CREATEPROJECT' | translate}}"
                   class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
                   (click)="onProjectCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.PROJECTCOMPONENT.EDITPROJECT' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!projectTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onProjectEdit()"></button>
           <button pButton type="button" label="{{'DASHBOARDMODULE.PROJECTCOMPONENT.DELETEPROJECT' | translate}}"
                   class="btn p-mt-2 p-button-danger"
                   [disabled]="!projectTable.selectedRow"
