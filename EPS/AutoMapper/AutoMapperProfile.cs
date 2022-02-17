@@ -24,7 +24,7 @@ namespace EPS.AutoMapper
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth));
 
             CreateMap<TblProject, ProjectResponse>()
-                .ForMember(dest => dest.projectId, opt => opt.MapFrom(src => src.IdClient))
+                .ForMember(dest => dest.projectId, opt => opt.MapFrom(src => src.IdProject))
                 .ForMember(dest => dest.projectName, opt => opt.MapFrom(src => src.ProjectName))
                 .ForMember(dest => dest.projectNumber, opt => opt.MapFrom(src => src.ProjectNumber))
                 .ForMember(dest => dest.projectDescription, opt => opt.MapFrom(src => src.ProjectDescription))

@@ -9,11 +9,15 @@ using EPS.models;
 using Microsoft.EntityFrameworkCore;
 using EPS.Dtos.Response;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
+using EPS.Dtos.Request;
 
 namespace EPS.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [SwaggerResponse(401, "The JWT is missing or invalid")]
     public class ProjectController : ControllerBase
     {
         private readonly PlanningSystemContext _planningSystemContext;
@@ -51,7 +55,7 @@ namespace EPS.Controllers
         /// <remarks>Returns a single project from database.</remarks>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        [HttpGet("/Project/Project/{projectId}")]
+        [HttpGet("/Project/{projectId}")]
         [SwaggerResponse(200, "Single project", typeof(IList<ProjectResponse>))]
         [SwaggerResponse(404, "A project with the specified Id could not be found", typeof(void))]
         public async Task<IActionResult> GetProjectsById(System.Guid projectId)
@@ -64,6 +68,88 @@ namespace EPS.Controllers
                 return NotFound("A project with the specified Id could not be found");
             else
                 return Ok(_mapper.Map<ProjectResponse>(project));
+        }
+
+        /// <summary>
+        /// Creates a new project
+        /// </summary>
+        /// <remarks>Creates a new project</remarks>
+        /// <param name="projectCreationRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/Project/")]
+        [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
+        public async Task<IActionResult> Create(ProjectCreationRequest projectCreationRequest)
+        {
+            TblProject project = new TblProject
+            {
+                IdProject = Guid.NewGuid(),
+                IdClient = projectCreationRequest.ClientId,
+                ProjectName = projectCreationRequest.Name,
+                ProjectNumber = projectCreationRequest.Number,
+                ProjectDescription = projectCreationRequest.Description
+
+            };
+
+            await _planningSystemContext.TblProjects.AddAsync(project);
+            await _planningSystemContext.SaveChangesAsync();
+            return Created("", project.IdProject);
+        }
+
+        /// <summary>
+        /// Updates a project
+        /// </summary>
+        /// <remarks>Updates a project</remarks>
+        /// <param name="projectId">The projectId from the project</param>
+        /// <param name="projectEditRequest"></param>
+        /// <returns></returns>
+        [HttpPut("/Project/{projectId}")]
+        [SwaggerResponse(204, "The project was successfully updated", typeof(void))]
+        [SwaggerResponse(404, "The project with the given id was not found", typeof(void))]
+        public async Task<IActionResult> UpdateClient(Guid projectId, ProjectEditRequest projectEditRequest)
+        {
+            TblProject project = await _planningSystemContext.TblProjects.Where(x => x.IdProject == projectId).FirstOrDefaultAsync();
+
+            if (project == null)
+                return NotFound("invalid projectId");
+            else
+            {
+                project.IdClient = projectEditRequest.ClientId;
+                project.ProjectName = projectEditRequest.Name;
+                project.ProjectNumber = projectEditRequest.Number;
+                project.ProjectDescription = projectEditRequest.Description;
+
+                await _planningSystemContext.SaveChangesAsync();
+
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// Deletes a project with the given projectId
+        /// </summary>
+        /// <remarks>Deletes a project with the given projectId</remarks>
+        /// <param name="projectId">The projectId from the project to be deleted</param>
+        /// <returns></returns>
+        [HttpDelete("/Project/{projectId}")]
+        [SwaggerResponse(204, "The project was successfully deleted", typeof(void))]
+        [SwaggerResponse(404, "The project was not found. Maybe it's already deleted.", typeof(void))]
+        public async Task<IActionResult> Delete(System.Guid projectId)
+        {
+            TblProject project = await _planningSystemContext.TblProjects.Where(x => x.IdProject == projectId).FirstOrDefaultAsync();
+
+            if (project == null)
+                return NotFound("The project was not found. Maybe it's already deleted");
+            else
+            {
+                List<TblAppointment> appointments = await _planningSystemContext.TblAppointments.Where(x => x.IdProject == projectId).ToListAsync();
+
+                foreach (TblAppointment appointment in appointments)
+                    appointment.IdProject = null;
+
+                _planningSystemContext.TblProjects.Remove(project);
+                await _planningSystemContext.SaveChangesAsync();
+                return NoContent();
+            }
         }
     }
 }

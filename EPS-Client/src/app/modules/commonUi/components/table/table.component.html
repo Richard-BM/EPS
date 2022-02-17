@@ -1,0 +1,245 @@
+<p-table #table [columns]="columnDefinitions" [value]="dataSource"
+         styleClass="p-datatable-sm p-datatable-gridlines"
+         [scrollable]="true" [scrollHeight]="scrollHeight"
+         [paginator]="paginator" [rows]="rows" [rowsPerPageOptions]="rowsPerPageOptions"
+         [loading]="showLoadingSymbol"
+         [resizableColumns]="true" columnResizeMode="expand"
+         selectionMode="single" [(selection)]="selectedRow" dataKey="id"
+         [exportFilename]="getExportFilename()"
+         (onEditInit)="onEditInit($event)"
+         (onEditCancel)="onEditCancel($event)"
+         (onEditComplete)="onEditComplete($event)">
+    <ng-template pTemplate="caption" *ngIf="customToolbarTemplate">
+        <div class="p-d-flex">
+            <ng-container *ngTemplateOutlet="customToolbarTemplate"></ng-container>
+            <div class="btn-group">
+                <p-splitButton label="Exportieren" icon="pi pi-download" [model]="exportButtonItems" (onClick)="exportCSV()" [disabled]="showLoadingSymbol"
+                               class="p-mr-2"></p-splitButton>
+                <!--TODO: https://github.com/primefaces/primeng/issues/9962 -->
+                <button pButton label="Filter zurücksetzen" class="p-button p-mt-2" icon="pi pi-filter-slash" (click)="resetAllFilters()"
+                        [disabled]="showLoadingSymbol || (!table.filteredValue || table.filteredValue.length == 0)"></button>
+
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let columnDefinition of columns" [style.width.px]="columnDefinition.width"/>
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <!--TODO: Resize von Spalten funktioniert nicht richtig --> 
+            <th *ngFor="let columnDefinition of columns" [style.width.px]="columnDefinition.width"
+                pSortableColumn="{{columnDefinition.field}}"
+                pResizableColumn
+                pTooltip="{{columnDefinition.toolTip ? columnDefinition.toolTip : columnDefinition.header}}"
+                tooltipPosition="left">
+
+                <div class="p-grid">
+                    <div class="p-col"> {{columnDefinition.header}}</div>
+                    <div class="p-col-fixed" style="width:70px">
+
+                        <ng-container [ngSwitch]="columnDefinition.filterType">
+                            <p-columnFilter *ngSwitchCase="0" type="text" field="{{columnDefinition.field}}" display="menu"
+                                            matchMode="contains" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            </p-columnFilter>
+
+                            <p-columnFilter *ngSwitchCase="1" type="boolean" field="{{columnDefinition.field}}" display="menu"></p-columnFilter>
+
+                            <p-columnFilter *ngSwitchCase="3" field="{{columnDefinition.field}}" display="menu"
+                                            matchMode="dateRange" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-calendar #calendarFilter dateFormat="dd.mm.yy" selectionMode="range"
+                                                showIcon="true" showWeek="true" showButtonBar="true"
+                                                placeholder="{{'COMMONUIMODULE.TABLECOMPONENT.ANY' | translate}}"
+                                                [ngModel]="value"
+                                                (onClose)="filter(calendarFilter.value)"></p-calendar>
+                                </ng-template>
+                            </p-columnFilter>
+
+                            <p-columnFilter *ngSwitchCase="4" field="{{columnDefinition.field}}" display="menu"
+                                            matchMode="timeEquals" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-calendar #timeFilter timeOnly="true"
+                                                showIcon="true" placeholder="{{'COMMONUIMODULE.TABLECOMPONENT.ANY' | translate}}"
+                                                [ngModel]="value"
+                                                (onClose)="filter(timeFilter.value)"></p-calendar>
+                                </ng-template>
+                            </p-columnFilter>
+
+                            <p-columnFilter *ngSwitchCase="7" field="{{columnDefinition.field}}" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect [ngModel]="value" [options]="columnDefinition.filterItems" placeholder="{{'COMMONUIMODULE.TABLECOMPONENT.ANY' | translate}}" 
+                                                   emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}" selectedItemsLabel="{{'COMMONUIMODULE.TABLECOMPONENT.SELECTEDITEMSCOUNT' | translate}}"
+                                                   maxSelectedLabels="2" (onChange)="filter($event.value)" optionLabel="label" optionValue="value">
+                                        <ng-template let-option pTemplate="item">
+                                            <span *ngIf="option.statusBadgeColor" [ngClass]="'status-badge ' + option.statusBadgeColor">
+                                                {{option.label}}
+                                            </span>
+                                            <ng-container *ngIf="!option.statusBadgeColor">
+                                                {{option.label}}
+                                            </ng-container>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+
+                        </ng-container>
+
+                        <p-sortIcon field="{{columnDefinition.field}}"></p-sortIcon>
+                    </div>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-columns="columns">
+        <tr [pSelectableRow]="item">
+
+            <ng-container *ngFor="let columnDefinition of columns;let i = index">
+
+                <!--TODO: Nicht bearbeitbare Spalten sollten in irgendeiner Form optisch hevorgehoben werden.
+                Z.b grau hinterlegt: 'background-color': editable ? '#F5F5F5' : null-->
+
+                <td *ngIf="!editable || !columnDefinition.editable"
+                    class="cellReadMode"
+                    [ngStyle]="{'text-align': columnDefinition.center === true ? 'center' : 'left'}" [style.width.px]="columnDefinition.width"
+                    [ngSwitch]="columnDefinition.displayType">
+
+                    <span *ngSwitchCase="1">
+                        <i class="pi" *ngIf="item[columnDefinition.field] != null && item[columnDefinition.field] != undefined"
+                           [ngClass]="{'true-icon pi-check-circle': item[columnDefinition.field], 'false-icon pi-times-circle': !item[columnDefinition.field]}"></i>
+                    </span>
+                    <span *ngSwitchCase="3" pTooltip="{{item[columnDefinition.field] | date: 'dd.MM.yyyy'}}"
+                        tooltipPosition="left">
+                        {{item[columnDefinition.field] | date: 'dd.MM.yyyy'}}
+                    </span>
+                    <span *ngSwitchCase="4" pTooltip="{{item[columnDefinition.field] | date: 'HH:mm'}}"
+                        tooltipPosition="left">
+                        {{item[columnDefinition.field] | date: 'HH:mm'}}
+                    </span>
+                    <span *ngSwitchCase="5" pTooltip="{{item[columnDefinition.field] | date: 'dd.MM.yyyy HH:mm'}}"
+                        tooltipPosition="left">
+                        {{item[columnDefinition.field] | date: 'dd.MM.yyyy HH:mm'}}
+                    </span>
+                    <span *ngSwitchDefault pTooltip="{{columnDefinition.toolTip ? columnDefinition.toolTip : item[columnDefinition.field]}}"
+                          tooltipPosition="left"
+                          [ngClass]="columnDefinition.showStatusBadge ? 'status-badge ' + item[columnDefinition.field + 'StatusBadgeColor'] : null">
+                        {{item[columnDefinition.field]}}
+                    </span>
+                </td>
+
+                <td *ngIf="editable && columnDefinition.editable"
+                    [ngClass]="{'cellReadMode': !editModeActivated}"
+                    [style.width.px]="columnDefinition.width"
+                    [ngStyle]="{'text-align': columnDefinition.center === true ? 'center' : 'left' }"
+                    pEditableColumn [pEditableColumn]="item" [pEditableColumnField]="columnDefinition.field" [pEditableColumnRowIndex]="i">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+
+                            <span [ngSwitch]="columnDefinition.displayType"
+                                  style="text-align: center;">
+
+                                <!--TODO: Textbox sollte gesamte Zelle füllen-->
+                                <!--TODO: https://github.com/primefaces/primeng/issues/10014 -->
+                                <input #cellInput *ngSwitchCase="0"
+                                       pInputText type="text" [(ngModel)]="item[columnDefinition.field]"
+                                       [style]="{'width':'100%'}"
+                                       [disabled]="!item.editable"
+                                       pTooltip="{{editTooltip}}">
+
+                                <p-checkbox *ngSwitchCase="1"
+                                            [binary]="true" [(ngModel)]="item[columnDefinition.field]"
+                                            [disabled]="!item.editable"
+                                            pTooltip="{{editTooltip}}">
+                                </p-checkbox>
+
+                                <p-inputNumber #cellInput *ngSwitchCase="2"
+                                               [(ngModel)]="item[columnDefinition.field]" mode="decimal"
+                                               [maxFractionDigits]="0"
+                                               [disabled]="!item.editable"
+                                               pTooltip="{{editTooltip}}">
+                                </p-inputNumber>
+
+                                <!--TODO: https://github.com/primefaces/primeng/issues/9272 -->
+                                <p-inputNumber #cellInput *ngSwitchCase="6"
+                                               [(ngModel)]="item[columnDefinition.field]" mode="decimal"
+                                               [minFractionDigits]="2"
+                                               [maxFractionDigits]="2"
+                                               [disabled]="!item.editable"
+                                               pTooltip="{{editTooltip}}">
+                                </p-inputNumber>
+
+                                <p-calendar #cellInput *ngSwitchCase="3" dateFormat="dd.mm.yy" selectionMode="single"
+                                            showWeek="true" showButtonBar="true"
+                                            placeholder="{{'COMMONUIMODULE.TABLECOMPONENT.SELECTDATE' | translate}}"
+                                            [(ngModel)]="item[columnDefinition.field]"
+                                            appendTo="body"
+                                            [disabled]="!item.editable"
+                                            pTooltip="{{editTooltip}}">
+                                </p-calendar>
+
+                                <p-calendar #cellInput *ngSwitchCase="4" timeOnly="true"
+                                            placeholder="{{'COMMONUIMODULE.TABLECOMPONENT.SELECTTIME' | translate}}"
+                                            [(ngModel)]="item[columnDefinition.field]"
+                                            appendTo="body"
+                                            [disabled]="!item.editable"
+                                            pTooltip="{{editTooltip}}">
+                                </p-calendar>
+
+                            </span>
+
+                            <!--TODO: https://github.com/primefaces/primeng/issues/10017-->
+                            <div *ngIf="columnDefinition.mandatory && !item[columnDefinition.field]"
+                                 class="p-pt-2" style="text-align: left;">
+                                <p-message severity="error" text="{{'COMMON.MANDATORYFIELD' | translate}}">
+                                </p-message>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="output">
+
+                            <ng-container [ngSwitch]="columnDefinition.displayType">
+
+                                <span *ngSwitchCase="1">
+                                    <i class="pi" *ngIf="item[columnDefinition.field] != null && item[columnDefinition.field] != undefined"
+                                       [ngClass]="{'true-icon pi-check-circle': item[columnDefinition.field], 'false-icon pi-times-circle': !item[columnDefinition.field]}"></i>
+                                </span>
+                                <span *ngSwitchCase="3" pTooltip="{{item[columnDefinition.field] | date: 'dd.MM.yyyy'}}"
+                                      tooltipPosition="left">
+                                    {{item[columnDefinition.field] | date: 'dd.MM.yyyy'}}
+                                </span>
+                                <span *ngSwitchCase="4" pTooltip="{{item[columnDefinition.field] | date: 'HH:mm'}}"
+                                      tooltipPosition="left">
+                                    {{item[columnDefinition.field] | date: 'HH:mm'}}
+                                </span>
+                                <span *ngSwitchCase="5" pTooltip="{{item[columnDefinition.field] | date: 'dd.MM.yyyy HH:mm'}}"
+                                      tooltipPosition="left">
+                                    {{item[columnDefinition.field] | date: 'dd.MM.yyyy HH:mm'}}
+                                </span>
+                                <span *ngSwitchDefault pTooltip="{{columnDefinition.toolTip ? columnDefinition.toolTip : item[columnDefinition.field]}}"
+                                      tooltipPosition="left"
+                                      [ngClass]="columnDefinition.showStatusBadge ? 'status-badge ' + item[columnDefinition.field + 'StatusBadgeColor'] : null">
+                                    {{item[columnDefinition.field]}}
+                                </span>
+                         
+                            </ng-container>
+
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+            </ng-container>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                {{'COMMONUIMODULE.TABLECOMPONENT.EMPTYMESSAGE' | translate}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        {{'COMMONUIMODULE.TABLECOMPONENT.NUMBEROFRECORDS' | translate}} {{table.filteredValue ? table.filteredValue.length : dataSource.length}}
+    </ng-template>
+
+</p-table>

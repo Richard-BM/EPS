@@ -1,0 +1,59 @@
+<form #projectDetailForm="ngForm">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="clientInput">{{'ASSISTENTMODULE.PROJECTCOMPONENT.SELECTCLIENT' | translate}}:*</label>
+      <p-dropdown #clientInput="ngModel" id="clientInput" name="clientInput" [options]="clients" optionLabel="name" [(ngModel)]="selectedClient" [filter]="false"
+                  placeholder="{{'ASSISTENTMODULE.PROJECTCOMPONENT.CLIENT' | translate}}"
+                  emptyFilterMessage="{{'COMMON.NORESULTS' | translate}}"
+                  [autoDisplayFirst]="false" required></p-dropdown>
+      <small id="clientInput-mandatory" class="p-invalid"
+             [ngStyle]="{'display': clientInput.invalid && (clientInput.touched || projectDetailForm.submitted) ? 'inline' : 'none'}">
+        {{'COMMON.MANDATORYFIELD' | translate}}
+      </small>
+    </div>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="nameInput">{{'ASSISTENTMODULE.CLIENTCOMPONENT.NAME' | translate}}*:</label>
+      <input #nameInput="ngModel" id="nameInput"
+             name="nameInput" type="text" pInputText
+             [(ngModel)]="projectEdit.name"
+             required/>
+    </div>
+    <small id="nameInput-mandatory" class="p-invalid" [ngStyle]="{'display': nameInput.invalid && (nameInput.touched || projectDetailForm.submitted) ? 'inline' : 'none'}">
+      {{'COMMON.MANDATORYFIELD' | translate}}
+    </small>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="numberInput">{{'ASSISTENTMODULE.PROJECTCOMPONENT.NUMBER' | translate}}:</label>
+      <input #nameInput="ngModel" id="numberInput"
+             name="numberInput" type="text" pInputText
+             [(ngModel)]="projectEdit.number" />
+    </div>
+  </div>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="descriptionInput">{{'ASSISTENTMODULE.PROJECTCOMPONENT.DESCRIPTION' | translate}}:</label>
+      <input #nameInput="ngModel" id="descriptionInput"
+             name="descriptionInput" type="text" pInputText
+             [(ngModel)]="projectEdit.description" />
+    </div>
+  </div>
+</form>
+
+<p-footer>
+  <div class="btn-align-right">
+    <div class="btn-group">
+      <button pButton type="button" label="{{'COMMON.CANCEL' | translate}}"
+              class="p-button-warning p-mt-2" icon="pi pi-times-circle" iconPos="left"
+              (click)="onExit()"></button>
+
+      <button pButton type="button" label="{{'COMMON.SAVE' | translate}}"
+              class="p-button-success p-mt-2"
+              [disabled]="!projectDetailForm.valid"
+              icon="pi pi-save" iconPos="left"
+              (click)="onFinish()"></button>
+    </div>
+  </div>
+</p-footer>

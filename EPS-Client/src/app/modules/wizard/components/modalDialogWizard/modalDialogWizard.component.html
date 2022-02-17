@@ -1,0 +1,16 @@
+<p-dialog [(visible)]="display" [header]="headerTitle" [modal]="true" [draggable]="false" [resizable]="false" [closable]="false"
+          [style]="{width: '50vw'}">
+    <ng-container *ngComponentOutlet="currentWizardStepComponent"></ng-container>
+    <p-confirmDialog header="{{'WIZARDMODULE.GENERAL.CANCEL' | translate}}" icon="pi pi-exclamation-triangle"
+                     acceptLabel="{{'WIZARDMODULE.GENERAL.YES' | translate}}" rejectLabel="{{'WIZARDMODULE.GENERAL.NO' | translate}}"
+                     message="{{'WIZARDMODULE.GENERAL.CANCELQUESTION' | translate}}"></p-confirmDialog>
+    <p-footer>
+        <p-button (click)="onCancel()" label="{{'WIZARDMODULE.GENERAL.CANCEL' | translate}}"></p-button>
+        <p-button icon="pi pi-arrow-circle-left" (click)="onPrevious()" label="{{'WIZARDMODULE.GENERAL.PREVIOUS' | translate}}"
+                  [ngStyle]="{'display': displayPreviousButton ? 'inline' : 'none'}"></p-button>
+        <p-button icon="pi pi-arrow-circle-right" (click)="onNext()" label="{{'WIZARDMODULE.GENERAL.NEXT' | translate}}"
+                  [ngStyle]="{'display': displayNextButton ? 'inline' : 'none'}"></p-button>
+        <p-button icon="pi pi-save" (click)="onSave()" label="{{'WIZARDMODULE.GENERAL.SAVE' | translate}}"
+                  [ngStyle]="{'display': displaySaveButton ? 'inline' : 'none'}"></p-button>
+    </p-footer>
+</p-dialog>

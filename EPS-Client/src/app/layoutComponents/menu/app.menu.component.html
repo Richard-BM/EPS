@@ -1,0 +1,17 @@
+<div class="layout-sidebar" [ngClass]="{'layout-sidebar-active': app.sidebarActive}" (click)="app.onSidebarClick($event)"
+     (mouseover)="app.sidebarActive=true" (mouseleave)="app.sidebarActive=false">
+    <div class="sidebar-logo">
+        <a class="sidebar">
+        </a>
+        <a routerLink="/">
+            <img alt="logo" src="assets/layout/images/logo-pulse.png" />
+            <span class="app-name" style="margin-right:1px;">EPS</span>
+        </a>
+    </div>
+
+    <div class="layout-menu-container" (click)="onMenuClick()">
+        <ul class="layout-menu">
+            <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+        </ul>
+    </div>
+</div>

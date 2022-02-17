@@ -1,0 +1,162 @@
+{
+  "PRELOAD": "LOADED",
+  "WEEKDAYSSHORT": "Mo;Di;Mi;Do;Fr;Sa;So",
+  "primeng": {
+    "startsWith": "Starts with",
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "endsWith": "Ends with",
+    "equals": "Equals",
+    "notEquals": "Not equals",
+    "noFilter": "No Filter",
+    "lt": "Less than",
+    "lte": "Less than or equal to",
+    "gt": "Greater than",
+    "gte": "Great then or equals",
+    "is": "Is",
+    "isNot": "Is not",
+    "before": "Before",
+    "after": "After",
+    "clear": "Löschen",
+    "apply": "Anwenden",
+    "matchAll": "Match All",
+    "matchAny": "Match Any",
+    "addRule": "Regel hinzufügen",
+    "removeRule": "Regel entfernen",
+    "accept": "Ja",
+    "reject": "Nein",
+    "choose": "Auswählen",
+    "upload": "Hochladen",
+    "cancel": "Abbrechen",
+    "dayNames": [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag" ],
+    "dayNamesShort": [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+    "dayNamesMin": [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+    "monthNames": [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
+    "monthNamesShort": [ "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sept", "Okt", "Nov", "Dez" ],
+    "today": "Heute",
+    "weekHeader": "Wk"
+  },
+  "COMMON": {
+    "NORESULTS": "Keine Treffer.",
+    "MANDATORYFIELD": "Pflichtangabe.",
+    "CHECKYOURINPUT": "Überprüfen Sie bitte Ihre Eingaben.",
+    "YES": "Ja",
+    "NO": "Nein",
+    "CLOSE": "Schließen",
+    "ERROR": "Fehler",
+    "GENERALERRORMESSAGE": "Bei der eben ausgeführten Aktion ist ein Fehler aufgetreten.",
+    "SAVE": "Speichern",
+    "NEXT": "Weiter",
+    "PREVIOUS": "Zurück",
+    "CANCEL": "Abbrechen",
+    "REFRESH": "Aktualisieren"
+  },
+  "APPMODULE": {
+    "MENUITEMS": {
+      "DASHBOARD": "Dashboard",
+      "PERSONS":  "Personal",
+      "CLIENTS": "Kunden",
+      "LOCATIONS": "Örtlichkeiten",
+      "APPOINTMENTS": "Termine"
+    },
+    "TOPBAR": {
+      "SIGNOUT": "Abmelden",
+      "WELCOME": "Willkommen"
+    }
+  },
+  "BREADCRUMBS": {
+    "APPOINTMENTS": "Termine",
+    "OVERVIEW": "Übersicht"
+  },
+  "AUTHMODULE": {
+    "LOGINCOMPONENT": {
+      "MICROSOFTACCOUNT": "Microsoft Konto",
+      "REMEMBERSIGNIN": "Eingeloggt bleiben",
+      "USERNAME": "Benutzername",
+      "ENTERUSERNAME": "Benutzernamen eingeben",
+      "PASSWORD": "Passwort",
+      "ENTERPASSWORD": "Passwort eingeben",
+      "SIGNIN": "Anmelden",
+      "INVALIDCREDENTIALS": "Deine Anmeldedaten sind nicht korrekt.",
+      "ENTERUSERNAMEANDPASSWORD": "Bitte Benutzername und Passwort eingeben.",
+      "ERROR": "Beim Anmeldevorgang ist ein Fehler aufgetreten."
+    }
+  },
+  "DASHBOARDMODULE": {
+    "CLIENTCOMPONENT": {
+      "COMPONENTNAME": "Kunden",
+      "CREATECLIENT": "Kunde anlegen",
+      "EDITCLIENT": "Kunde bearbeiten",
+      "DELETECLIENT": "Kunde löschen"
+    },
+    "PROJECTCOMPONENT": {
+      "COMPONENTNAME": "Projekte",
+      "CREATEPROJECT": "Projekt anlegen",
+      "EDITPROJECT": "Projekt bearbeiten",
+      "DELETEPROJECT": "Projekt entfernen"
+    },
+    "APPOINTMENTCOMPONENT": {
+      "COMPONENTNAME": "Termine",
+      "CREATEAPPOINTMENT": "Termin anlegen",
+      "EDITAPPOINTMENT": "Termin bearbeiten",
+      "DELETEAPPOINTMENT": "Termin entfernen"
+    },
+    "LOCATIONCOMPONENT": {
+      "COMPONENTNAME": "Örtlichkeiten",
+      "CREATELOCATION": "Örtlichkeit anlegen",
+      "EDITLOCATION": "Örtlichkeit bearbeiten",
+      "DELETELOCATION": "Örtlichkeit entfernen"
+    },
+    "PERSONCOMPONENT": {
+      "COMPONENTNAME": "Mitarbeiter",
+      "CREATEPERSON": "Mitarbeiter anlegen",
+      "EDITPERSON": "Mitarbeiter bearbeiten",
+      "DELETEPERSON": "Mitarbeiter entfernen"
+    }
+  },
+  "ASSISTENTMODULE": {
+    "CLIENTCOMPONENT": {
+      "NAME": "Name"
+    },
+    "PROJECTCOMPONENT": {
+      "SELECTCLIENT": "Kunde auswählen",
+      "CLIENT": "Kunde",
+      "NUMBER": "Projekt Nr.",
+      "DESCRIPTION": "Projekt Beschreibung"
+    },
+    "LOCATIONCOMPONENT": {
+      "NAME": "Name",
+      "STREET": "Straße",
+      "POSTALCODE": "Postleitzahl",
+      "CITY": "Stadt"
+    },
+    "PERSONCOMPONENT": {
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "EMAIL": "E-Mail adresse",
+      "PASSWORD": "Passwort",
+      "DATEOFBIRTH": "Geburtsdatum"
+    },
+    "APPOINTMENTCOMPONENT": {
+      "SELECTPERSON": "Person auswählen",
+      "PERSON": "Arbeiter",
+      "SELECTPROJECT": "Projekt auswählen",
+      "PROJECT": "Projekt",
+      "SELECTLOCATION": "Örtlichkeit auswählen",
+      "LOCATION": "Örtlichkeit",
+      "TIMEFROM": "Von",
+      "TIMETO": "Bis"
+    }
+  },
+  "COMMONUIMODULE": {
+    "TABLECOMPONENT": {
+      "EMPTYMESSAGE": "Es existieren keine Einträge oder es konnten keine Einträge auf Basis Ihrer Filtereinstellungen gefunden werden.",
+      "ANY": "Alle",
+      "NUMBEROFRECORDS": "Anzahl Datensätze:",
+      "SELECTEDITEMSCOUNT": "{0} Elemente ausgewählt",
+      "SELECTDATE": "Datum auswählen",
+      "SELECTTIME": "Uhrzeit auswählen",
+      "EDITLOCKED": "Bearbeitung gesperrt. Wird bearbeitet von"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<h2>{{'DASHBOARDMODULE.LOCATIONCOMPONENT.COMPONENTNAME' | translate}}</h2>
+<app-table #locationTable [columnDefinitions]="locationsColumnDefinitions" [dataSource]="locationDataSource" [showLoadingSymbol]="locationOverviewIsLoading"
+           scrollHeight="600px" [paginator]="true" [rows]="50" [rowsPerPageOptions]="[10,25,50, 100]" [editable]="true">
+  <ng-template #tableToolbar>
+    <div class="p-d-flex">
+      <div class="p-toolbar-group-left">
+        <div class="btn-group">
+          <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.CREATELOCATION' | translate}}"
+                  class="btn p-mt-2 p-button-success" icon="pi pi-plus p-mr-2" iconPos="left"
+                  (click)="onLocationCreate()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.EDITLOCATION' | translate}}"
+                  class="btn p-mt-2 p-button-warning"
+                  [disabled]="!locationTable.selectedRow"
+                  icon="pi pi-pencil p-mr-2" iconPos="left"
+                  (click)="onLocationEdit()"></button>
+          <button pButton type="button" label="{{'DASHBOARDMODULE.LOCATIONCOMPONENT.DELETELOCATION' | translate}}"
+                  class="btn p-mt-2 p-button-danger"
+                  [disabled]="!locationTable.selectedRow"
+                  icon="pi pi-trash p-mr-2" iconPos="left"
+                  (click)="onLocationDelete()"></button>
+          <button pButton type="button" label="{{'COMMON.REFRESH' | translate}}"
+                  class="btn p-mt-2 p-button-primary" icon="pi pi-refresh p-mr-2" iconPos="left"
+                  (click)="loadLocationDataSource()"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-table>

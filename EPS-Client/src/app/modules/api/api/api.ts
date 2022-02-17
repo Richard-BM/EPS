@@ -1,0 +1,13 @@
+export * from './appointment.service';
+import { AppointmentService } from './appointment.service';
+export * from './authentication.service';
+import { AuthenticationService } from './authentication.service';
+export * from './client.service';
+import { ClientService } from './client.service';
+export * from './location.service';
+import { LocationService } from './location.service';
+export * from './person.service';
+import { PersonService } from './person.service';
+export * from './project.service';
+import { ProjectService } from './project.service';
+export const APIS = [AppointmentService, AuthenticationService, ClientService, LocationService, PersonService, ProjectService];

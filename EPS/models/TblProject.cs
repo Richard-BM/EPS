@@ -13,7 +13,7 @@ namespace EPS.models
         }
 
         public Guid IdProject { get; set; }
-        public Guid IdClient { get; set; }
+        public Guid? IdClient { get; set; }
         public string ProjectName { get; set; }
         public string ProjectNumber { get; set; }
         public string ProjectDescription { get; set; }
