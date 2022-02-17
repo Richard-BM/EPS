@@ -93,7 +93,7 @@ export class LocationsComponent implements OnInit {
 
     const locationId = this.locationTable.selectedRow.id;
 
-    this.locationService.locationLocationsLocationIdDelete(this.locationTable.selectedRow.id).subscribe(response => {
+    this.locationService.locationLocationIdDelete(this.locationTable.selectedRow.id).subscribe(response => {
       this.dataStoreService.dataChanged(locationId);
       this.locationOverviewIsLoading = false;
     });

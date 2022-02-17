@@ -81,7 +81,7 @@ export class AssistentAppointmentComponent implements OnInit {
         timeTo: this.appointmentTimeTo
       }
 
-      this.appointmentService.appointmentAppointmentsAppointmentIdPut(this.appointmentEdit.id, changedAppointment).subscribe(response => {
+      this.appointmentService.appointmentAppointmentIdPut(this.appointmentEdit.id, changedAppointment).subscribe(response => {
         this.dataStoreService.dataChanged(response);
         this.ref.close();
       });
@@ -96,7 +96,7 @@ export class AssistentAppointmentComponent implements OnInit {
         timeTo: this.appointmentTimeTo
       }
 
-      this.appointmentService.appointmentAppointmentsPost(newAppointment).subscribe(response => {
+      this.appointmentService.appointmentPost(newAppointment).subscribe(response => {
         this.dataStoreService.dataChanged(response);
         this.ref.close();
       });

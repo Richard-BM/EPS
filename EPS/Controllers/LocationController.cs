@@ -53,7 +53,7 @@ namespace EPS.Controllers
         /// <remarks>Returns a single location from the database.</remarks>
         /// <param name="locationId"></param>
         /// <returns></returns>
-        [HttpGet("/Location/Locations/{locationId}")]
+        [HttpGet("/Location/{locationId}")]
         [SwaggerResponse(200, "Single location", typeof(LocationResponse))]
         [SwaggerResponse(404, "A location with the specified Id could not be found", typeof(void))]
         public async Task<IActionResult> GetClientById(System.Guid locationId)
@@ -72,7 +72,7 @@ namespace EPS.Controllers
         /// <remarks>Creates a new location</remarks>
         /// <param name="locationCreationRequest"></param>
         /// <returns></returns>
-        [HttpPost("/Location/Locations/")]
+        [HttpPost("/Location/")]
         [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
         public async Task<IActionResult> Create(LocationCreationRequest locationCreationRequest)
         {
@@ -97,7 +97,7 @@ namespace EPS.Controllers
         /// <param name="locationId">The locationId from the location</param>
         /// <param name="locationEditRequest"></param>
         /// <returns></returns>
-        [HttpPut("/Location/Locations/{locationId}")]
+        [HttpPut("/Location/{locationId}")]
         [SwaggerResponse(204, "The location was successfully updated", typeof(void))]
         [SwaggerResponse(404, "The location with the given id was not found", typeof(void))]
         public async Task<IActionResult> UpdateClient(Guid locationId, LocationEditRequest locationEditRequest)
@@ -126,7 +126,7 @@ namespace EPS.Controllers
         /// <remarks>Deletes a location with the given locationId</remarks>
         /// <param name="locationId">The locationId from the location to be deleted</param>
         /// <returns></returns>
-        [HttpDelete("/Location/Locations/{locationId}")]
+        [HttpDelete("/Location/{locationId}")]
         [SwaggerResponse(204, "The location was successfully deleted", typeof(void))]
         [SwaggerResponse(404, "The location was not found. Maybe it's already deleted.", typeof(void))]
         public async Task<IActionResult> Delete(System.Guid locationId)

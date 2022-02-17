@@ -65,13 +65,13 @@ export class AppointmentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public appointmentAppointmentsAppointmentIdDelete(appointmentId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public appointmentAppointmentsAppointmentIdDelete(appointmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public appointmentAppointmentsAppointmentIdDelete(appointmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public appointmentAppointmentsAppointmentIdDelete(appointmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public appointmentAppointmentIdDelete(appointmentId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public appointmentAppointmentIdDelete(appointmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public appointmentAppointmentIdDelete(appointmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public appointmentAppointmentIdDelete(appointmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (appointmentId === null || appointmentId === undefined) {
-            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentsAppointmentIdDelete.');
+            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentIdDelete.');
         }
 
         let headers = this.defaultHeaders;
@@ -96,7 +96,7 @@ export class AppointmentService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete',`${this.basePath}/Appointment/Appointments/${encodeURIComponent(String(appointmentId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/Appointment/${encodeURIComponent(String(appointmentId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -113,13 +113,13 @@ export class AppointmentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public appointmentAppointmentsAppointmentIdGet(appointmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AppointmentResponse>;
-    public appointmentAppointmentsAppointmentIdGet(appointmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AppointmentResponse>>;
-    public appointmentAppointmentsAppointmentIdGet(appointmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AppointmentResponse>>;
-    public appointmentAppointmentsAppointmentIdGet(appointmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public appointmentAppointmentIdGet(appointmentId: string, observe?: 'body', reportProgress?: boolean): Observable<AppointmentResponse>;
+    public appointmentAppointmentIdGet(appointmentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AppointmentResponse>>;
+    public appointmentAppointmentIdGet(appointmentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AppointmentResponse>>;
+    public appointmentAppointmentIdGet(appointmentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (appointmentId === null || appointmentId === undefined) {
-            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentsAppointmentIdGet.');
+            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentIdGet.');
         }
 
         let headers = this.defaultHeaders;
@@ -144,7 +144,7 @@ export class AppointmentService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<AppointmentResponse>('get',`${this.basePath}/Appointment/Appointments/${encodeURIComponent(String(appointmentId))}`,
+        return this.httpClient.request<AppointmentResponse>('get',`${this.basePath}/Appointment/${encodeURIComponent(String(appointmentId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -162,13 +162,13 @@ export class AppointmentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public appointmentAppointmentsAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public appointmentAppointmentsAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public appointmentAppointmentsAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public appointmentAppointmentsAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public appointmentAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public appointmentAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public appointmentAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public appointmentAppointmentIdPut(appointmentId: string, body?: AppointmentEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (appointmentId === null || appointmentId === undefined) {
-            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentsAppointmentIdPut.');
+            throw new Error('Required parameter appointmentId was null or undefined when calling appointmentAppointmentIdPut.');
         }
 
 
@@ -201,7 +201,7 @@ export class AppointmentService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('put',`${this.basePath}/Appointment/Appointments/${encodeURIComponent(String(appointmentId))}`,
+        return this.httpClient.request<any>('put',`${this.basePath}/Appointment/${encodeURIComponent(String(appointmentId))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -262,10 +262,10 @@ export class AppointmentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public appointmentAppointmentsPost(body?: AppointmentCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public appointmentAppointmentsPost(body?: AppointmentCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public appointmentAppointmentsPost(body?: AppointmentCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public appointmentAppointmentsPost(body?: AppointmentCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public appointmentPost(body?: AppointmentCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public appointmentPost(body?: AppointmentCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public appointmentPost(body?: AppointmentCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public appointmentPost(body?: AppointmentCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -297,7 +297,7 @@ export class AppointmentService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/Appointment/Appointments`,
+        return this.httpClient.request<any>('post',`${this.basePath}/Appointment`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

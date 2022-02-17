@@ -21,6 +21,18 @@ export class AppMenuComponent implements OnInit {
             this.model = [
                 {
                     label: this.translateService.instant("APPMODULE.MENUITEMS.DASHBOARD"), icon: 'pi pi-fw pi-home', routerLink: ['/']
+                },
+                {
+                  label: this.translateService.instant("APPMODULE.MENUITEMS.PERSONS"), icon: 'pi pi-fw pi-users', routerLink: ['/staff']
+                },
+                {
+                  label: this.translateService.instant("APPMODULE.MENUITEMS.CLIENTS"), icon: 'pi pi-fw pi-clone', routerLink: ['/clients']
+                },
+                {
+                  label: this.translateService.instant("APPMODULE.MENUITEMS.LOCATIONS"), icon: 'pi pi-fw pi-map-marker', routerLink: ['/locations']
+                },
+                {
+                  label: this.translateService.instant("APPMODULE.MENUITEMS.APPOINTMENTS"), icon: 'pi pi-fw pi-calendar', routerLink: ['/appointments']
                 }
             ];
         });

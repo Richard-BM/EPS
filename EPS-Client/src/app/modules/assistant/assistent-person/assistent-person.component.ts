@@ -46,7 +46,7 @@ export class AssistentPersonComponent implements OnInit {
         dateOfBirth: new Date(this.personEdit.dateOfBirth)
       }
 
-      this.personService.personPersonsLocationIdPut(this.personEdit.id, changedPerson).subscribe(clientResponse => {
+      this.personService.personPersonIdPut(this.personEdit.id, changedPerson).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });

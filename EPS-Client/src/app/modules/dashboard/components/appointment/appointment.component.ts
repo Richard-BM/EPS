@@ -95,7 +95,7 @@ export class AppointmentComponent implements OnInit {
   public onAppointmentDelete() {
     this.appointmentOverviewIsLoading = true;
     const appointmentId = this.appointmentTable.selectedRow.id
-    this.appointmentService.appointmentAppointmentsAppointmentIdDelete(appointmentId).subscribe(response => {
+    this.appointmentService.appointmentAppointmentIdDelete(appointmentId).subscribe(response => {
       this.dataStoreService.dataChanged(appointmentId);
       this.appointmentOverviewIsLoading = false;
     });

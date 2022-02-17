@@ -59,7 +59,7 @@ namespace EPS.Controllers
         /// <remarks>Returns all appointments in database.</remarks>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpGet("/Appointment/Appointments/{appointmentId}")]
+        [HttpGet("/Appointment/{appointmentId}")]
         [SwaggerResponse(200, "Single appointment", typeof(AppointmentResponse))]
         [SwaggerResponse(404, "A appointment with the specified Id could not be found", typeof(void))]
         public async Task<IActionResult> GetClientById(System.Guid appointmentId)
@@ -78,7 +78,7 @@ namespace EPS.Controllers
         /// <remarks>Creates a new appointment</remarks>
         /// <param name="appointmentCreationRequest"></param>
         /// <returns></returns>
-        [HttpPost("/Appointment/Appointments/")]
+        [HttpPost("/Appointment/")]
         [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
         public async Task<IActionResult> Create(AppointmentCreationRequest appointmentCreationRequest)
         {
@@ -104,7 +104,7 @@ namespace EPS.Controllers
         /// <param name="appointmentId">The appointmentId from the appointment</param>
         /// <param name="appointmentEditRequest"></param>
         /// <returns></returns>
-        [HttpPut("/Appointment/Appointments/{appointmentId}")]
+        [HttpPut("/Appointment/{appointmentId}")]
         [SwaggerResponse(204, "The appointment was successfully updated", typeof(void))]
         [SwaggerResponse(404, "The appointment with the given id was not found", typeof(void))]
         public async Task<IActionResult> UpdateClient(Guid appointmentId, AppointmentEditRequest appointmentEditRequest)
@@ -133,7 +133,7 @@ namespace EPS.Controllers
         /// <remarks>Deletes a appointment with the given appointmentId</remarks>
         /// <param name="appointmentId">The appointmentId from the appointment to be deleted</param>
         /// <returns></returns>
-        [HttpDelete("/Appointment/Appointments/{appointmentId}")]
+        [HttpDelete("/Appointment/{appointmentId}")]
         [SwaggerResponse(204, "The appointment was successfully deleted", typeof(void))]
         [SwaggerResponse(404, "The appointment was not found. Maybe it's already deleted.", typeof(void))]
         public async Task<IActionResult> Delete(System.Guid appointmentId)

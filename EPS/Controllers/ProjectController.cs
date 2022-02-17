@@ -55,7 +55,7 @@ namespace EPS.Controllers
         /// <remarks>Returns a single project from database.</remarks>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        [HttpGet("/Project/Project/{projectId}")]
+        [HttpGet("/Project/{projectId}")]
         [SwaggerResponse(200, "Single project", typeof(IList<ProjectResponse>))]
         [SwaggerResponse(404, "A project with the specified Id could not be found", typeof(void))]
         public async Task<IActionResult> GetProjectsById(System.Guid projectId)
@@ -76,7 +76,7 @@ namespace EPS.Controllers
         /// <remarks>Creates a new project</remarks>
         /// <param name="projectCreationRequest"></param>
         /// <returns></returns>
-        [HttpPost("/Project/Project/")]
+        [HttpPost("/Project/")]
         [SwaggerResponse(201, "The appointment was successfully created", typeof(void))]
         public async Task<IActionResult> Create(ProjectCreationRequest projectCreationRequest)
         {
@@ -102,7 +102,7 @@ namespace EPS.Controllers
         /// <param name="projectId">The projectId from the project</param>
         /// <param name="projectEditRequest"></param>
         /// <returns></returns>
-        [HttpPut("/Project/Project/{projectId}")]
+        [HttpPut("/Project/{projectId}")]
         [SwaggerResponse(204, "The project was successfully updated", typeof(void))]
         [SwaggerResponse(404, "The project with the given id was not found", typeof(void))]
         public async Task<IActionResult> UpdateClient(Guid projectId, ProjectEditRequest projectEditRequest)
@@ -130,7 +130,7 @@ namespace EPS.Controllers
         /// <remarks>Deletes a project with the given projectId</remarks>
         /// <param name="projectId">The projectId from the project to be deleted</param>
         /// <returns></returns>
-        [HttpDelete("/Project/Project/{projectId}")]
+        [HttpDelete("/Project/{projectId}")]
         [SwaggerResponse(204, "The project was successfully deleted", typeof(void))]
         [SwaggerResponse(404, "The project was not found. Maybe it's already deleted.", typeof(void))]
         public async Task<IActionResult> Delete(System.Guid projectId)

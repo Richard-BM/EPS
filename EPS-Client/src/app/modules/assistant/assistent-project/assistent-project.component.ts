@@ -53,7 +53,7 @@ export class AssistentProjectComponent implements OnInit {
         description: this.projectEdit.description      
       }
 
-      this.projectService.projectProjectProjectIdPut(this.projectEdit.id, changedProject).subscribe(clientResponse => {
+      this.projectService.projectProjectIdPut(this.projectEdit.id, changedProject).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });
@@ -66,7 +66,7 @@ export class AssistentProjectComponent implements OnInit {
         description: this.projectEdit.description
       }
 
-      this.projectService.projectProjectPost(newProject).subscribe(clientResponse => {
+      this.projectService.projectPost(newProject).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });

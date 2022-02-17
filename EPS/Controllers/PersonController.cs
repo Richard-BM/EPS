@@ -53,7 +53,7 @@ namespace EPS.Controllers
         /// <remarks>Returns a single person from database.</remarks>
         /// <param name="personId"></param>
         /// <returns></returns>
-        [HttpGet("/Person/Persons/{personId}")]
+        [HttpGet("/Person/{personId}")]
         [SwaggerResponse(200, "Single person", typeof(PersonResponse))]
         [SwaggerResponse(404, "A person with the specified Id could not be found", typeof(void))]
         public async Task<IActionResult> GetProjectsById(System.Guid personId)
@@ -73,7 +73,7 @@ namespace EPS.Controllers
         /// <param name="personId">The personId from the person</param>
         /// <param name="personEditRequest"></param>
         /// <returns></returns>
-        [HttpPut("/Person/Persons/{personId}")]
+        [HttpPut("/Person/{personId}")]
         [SwaggerResponse(204, "The person was successfully updated", typeof(void))]
         [SwaggerResponse(404, "The person with the given id was not found", typeof(void))]
         public async Task<IActionResult> UpdateClient(Guid personId, PersonEditRequest PersonEditRequest)

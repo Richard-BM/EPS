@@ -60,6 +60,112 @@ export class PersonService {
     /**
      * 
      * 
+     * @param personId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public personPersonIdGet(personId: string, observe?: 'body', reportProgress?: boolean): Observable<PersonResponse>;
+    public personPersonIdGet(personId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PersonResponse>>;
+    public personPersonIdGet(personId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PersonResponse>>;
+    public personPersonIdGet(personId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (personId === null || personId === undefined) {
+            throw new Error('Required parameter personId was null or undefined when calling personPersonIdGet.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<PersonResponse>('get',`${this.basePath}/Person/${encodeURIComponent(String(personId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param personId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public personPersonIdPut(personId: string, body?: PersonEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public personPersonIdPut(personId: string, body?: PersonEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public personPersonIdPut(personId: string, body?: PersonEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public personPersonIdPut(personId: string, body?: PersonEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (personId === null || personId === undefined) {
+            throw new Error('Required parameter personId was null or undefined when calling personPersonIdPut.');
+        }
+
+
+        let headers = this.defaultHeaders;
+
+        // authentication (Bearer) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<any>('put',`${this.basePath}/Person/${encodeURIComponent(String(personId))}`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -92,72 +198,6 @@ export class PersonService {
 
         return this.httpClient.request<Array<PersonResponse>>('get',`${this.basePath}/Person/Persons`,
             {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param locationId 
-     * @param body 
-     * @param personId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public personPersonsLocationIdPut(locationId: string, body?: PersonEditRequest, personId?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public personPersonsLocationIdPut(locationId: string, body?: PersonEditRequest, personId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public personPersonsLocationIdPut(locationId: string, body?: PersonEditRequest, personId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public personPersonsLocationIdPut(locationId: string, body?: PersonEditRequest, personId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (locationId === null || locationId === undefined) {
-            throw new Error('Required parameter locationId was null or undefined when calling personPersonsLocationIdPut.');
-        }
-
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (personId !== undefined && personId !== null) {
-            queryParameters = queryParameters.set('personId', <any>personId);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (Bearer) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json',
-            'text/json',
-            'application/_*+json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<any>('put',`${this.basePath}/Person/Persons/${encodeURIComponent(String(locationId))}`,
-            {
-                body: body,
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -205,54 +245,6 @@ export class PersonService {
         ];
 
         return this.httpClient.request<any>('delete',`${this.basePath}/Person/Persons/${encodeURIComponent(String(personId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param personId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public personPersonsPersonIdGet(personId: string, observe?: 'body', reportProgress?: boolean): Observable<PersonResponse>;
-    public personPersonsPersonIdGet(personId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PersonResponse>>;
-    public personPersonsPersonIdGet(personId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PersonResponse>>;
-    public personPersonsPersonIdGet(personId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (personId === null || personId === undefined) {
-            throw new Error('Required parameter personId was null or undefined when calling personPersonsPersonIdGet.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (Bearer) required
-        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PersonResponse>('get',`${this.basePath}/Person/Persons/${encodeURIComponent(String(personId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -40,7 +40,7 @@ export class ClientComponent implements OnInit {
         name: this.clientEdit.name
       }
 
-      this.clientService.clientClientsClientIdPut(this.clientEdit.id, changedClient).subscribe(clientResponse => {
+      this.clientService.clientClientIdPut(this.clientEdit.id, changedClient).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });

@@ -93,7 +93,7 @@ namespace EPS.Controllers
         /// <param name="clientId">The clientId from the client</param>
         /// <param name="clientEditRequest"></param>
         /// <returns></returns>
-        [HttpPut("/Client/Clients/{clientId}")]
+        [HttpPut("/Client/{clientId}")]
         [SwaggerResponse(204, "The client was successfully updated", typeof(void))]
         [SwaggerResponse(404, "The client with the given id was not found", typeof(void))]
         public async Task<IActionResult> UpdateClient(Guid clientId, ClientEditRequest clientEditRequest)
@@ -118,7 +118,7 @@ namespace EPS.Controllers
         /// <remarks>Deletes a client with the given clientId</remarks>
         /// <param name="clientId">The clientId from the client to be deleted</param>
         /// <returns></returns>
-        [HttpDelete("/Client/Clients/{clientId}")]
+        [HttpDelete("/Client/{clientId}")]
         [SwaggerResponse(204, "The client was successfully deleted", typeof(void))]
         [SwaggerResponse(404, "The client was not found. Maybe it's already deleted.", typeof(void))]
         public async Task<IActionResult> Delete(System.Guid clientId)

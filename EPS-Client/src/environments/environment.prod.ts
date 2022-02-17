@@ -9,7 +9,7 @@ export const environment = {
 
 export function apiConfiguration() {
     return new Configuration({
-        basePath: "https://localhost:5001",
+      basePath: "https://192.168.178.48:5001",
     });
 }
 

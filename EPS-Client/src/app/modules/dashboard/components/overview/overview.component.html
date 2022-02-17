@@ -1,13 +1,56 @@
-<app-clients></app-clients>
-<br />
-<br />
-<app-projects></app-projects>
-<br />
+<div class="p-grid layout-dashboard">
+  <div class="p-col-12 p-xl-3 p-md-6">
+    <div class="p-grid p-nogutter widget-overview-box overview-box-1">
+      <div class="p-col-3 overview-box-icon">
+        <img src="assets/layout/images/dashboard/termine.png" alt="mirage-layout" />
+      </div>
+      <div class="p-col-6 overview-box-text">
+        <h5>Termine</h5>
+      </div>
+      <div class="p-col-3 overview-box-status">
+        {{appointmentCount}}
+      </div>
+    </div>
+  </div>
+  <div class="p-col-12 p-xl-3 p-md-6">
+    <div class="p-grid p-nogutter widget-overview-box overview-box-2">
+      <div class="p-col-3 overview-box-icon">
+        <img src="assets/layout/images/dashboard/icon-checkins.svg" alt="mirage-layout" />
+      </div>
+      <div class="p-col-6 overview-box-text">
+        <h5>Kunden</h5>
+      </div>
+      <div class="p-col-3 overview-box-status">
+        {{clientCount}}
+      </div>
+    </div>
+  </div>
+  <div class="p-col-12 p-xl-3 p-md-6">
+    <div class="p-grid p-nogutter widget-overview-box overview-box-3">
+      <div class="p-col-3 overview-box-icon">
+        <img src="assets/layout/images/dashboard/zusammenarbeit.png" alt="mirage-layout" />
+      </div>
+      <div class="p-col-6 overview-box-text">
+        <h5>Personal</h5>
+      </div>
+      <div class="p-col-3 overview-box-status">
+        {{staffCount}}
+      </div>
+    </div>
+  </div>
+  <div class="p-col-12 p-xl-3 p-md-6">
+    <div class="p-grid p-nogutter widget-overview-box overview-box-4">
+      <div class="p-col-3 overview-box-icon">
+        <img src="assets/layout/images/dashboard/icon-checkins.svg" alt="mirage-layout" />
+      </div>
+      <div class="p-col-6 overview-box-text">
+        <h5>Örtlichkeiten</h5>
+      </div>
+      <div class="p-col-3 overview-box-status">
+        {{locationCount}}
+      </div>
+    </div>
+  </div>
+</div>
 <br />
 <app-appointment></app-appointment>
-<br />
-<br />
-<app-locations></app-locations>
-<br />
-<br />
-<app-persons></app-persons>

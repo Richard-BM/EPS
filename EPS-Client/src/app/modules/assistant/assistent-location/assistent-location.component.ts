@@ -44,7 +44,7 @@ export class AssistentLocationComponent implements OnInit {
         city: this.locationEdit.city
       }
 
-      this.locationService.locationLocationsLocationIdPut(this.locationEdit.id, changedLocation).subscribe(clientResponse => {
+      this.locationService.locationLocationIdPut(this.locationEdit.id, changedLocation).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });
@@ -57,7 +57,7 @@ export class AssistentLocationComponent implements OnInit {
         city: this.locationEdit.city
       }
 
-      this.locationService.locationLocationsPost(newLocation).subscribe(clientResponse => {
+      this.locationService.locationPost(newLocation).subscribe(clientResponse => {
         this.dataStoreService.dataChanged(clientResponse);
         this.ref.close();
       });

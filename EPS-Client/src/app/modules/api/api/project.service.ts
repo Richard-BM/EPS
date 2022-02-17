@@ -65,10 +65,10 @@ export class ProjectService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public projectProjectPost(body?: ProjectCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public projectProjectPost(body?: ProjectCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public projectProjectPost(body?: ProjectCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public projectProjectPost(body?: ProjectCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public projectPost(body?: ProjectCreationRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public projectPost(body?: ProjectCreationRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public projectPost(body?: ProjectCreationRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public projectPost(body?: ProjectCreationRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -100,7 +100,7 @@ export class ProjectService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/Project/Project`,
+        return this.httpClient.request<any>('post',`${this.basePath}/Project`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -118,13 +118,13 @@ export class ProjectService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public projectProjectProjectIdDelete(projectId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public projectProjectProjectIdDelete(projectId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public projectProjectProjectIdDelete(projectId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public projectProjectProjectIdDelete(projectId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public projectProjectIdDelete(projectId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public projectProjectIdDelete(projectId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public projectProjectIdDelete(projectId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public projectProjectIdDelete(projectId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling projectProjectProjectIdDelete.');
+            throw new Error('Required parameter projectId was null or undefined when calling projectProjectIdDelete.');
         }
 
         let headers = this.defaultHeaders;
@@ -149,7 +149,7 @@ export class ProjectService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete',`${this.basePath}/Project/Project/${encodeURIComponent(String(projectId))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/Project/${encodeURIComponent(String(projectId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -166,13 +166,13 @@ export class ProjectService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public projectProjectProjectIdGet(projectId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ProjectResponse>>;
-    public projectProjectProjectIdGet(projectId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProjectResponse>>>;
-    public projectProjectProjectIdGet(projectId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProjectResponse>>>;
-    public projectProjectProjectIdGet(projectId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public projectProjectIdGet(projectId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<ProjectResponse>>;
+    public projectProjectIdGet(projectId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProjectResponse>>>;
+    public projectProjectIdGet(projectId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProjectResponse>>>;
+    public projectProjectIdGet(projectId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling projectProjectProjectIdGet.');
+            throw new Error('Required parameter projectId was null or undefined when calling projectProjectIdGet.');
         }
 
         let headers = this.defaultHeaders;
@@ -197,7 +197,7 @@ export class ProjectService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<ProjectResponse>>('get',`${this.basePath}/Project/Project/${encodeURIComponent(String(projectId))}`,
+        return this.httpClient.request<Array<ProjectResponse>>('get',`${this.basePath}/Project/${encodeURIComponent(String(projectId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -215,13 +215,13 @@ export class ProjectService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public projectProjectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public projectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public projectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public projectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public projectProjectIdPut(projectId: string, body?: ProjectEditRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling projectProjectProjectIdPut.');
+            throw new Error('Required parameter projectId was null or undefined when calling projectProjectIdPut.');
         }
 
 
@@ -254,7 +254,7 @@ export class ProjectService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('put',`${this.basePath}/Project/Project/${encodeURIComponent(String(projectId))}`,
+        return this.httpClient.request<any>('put',`${this.basePath}/Project/${encodeURIComponent(String(projectId))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

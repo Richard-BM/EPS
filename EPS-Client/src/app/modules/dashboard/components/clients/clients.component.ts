@@ -90,7 +90,7 @@ export class ClientsComponent implements OnInit {
   public onClientDelete() {
     this.clientOverviewIsLoading = true;
     const clientId = this.clientTable.selectedRow.id
-    this.clientService.clientClientsClientIdDelete(clientId).subscribe(response => {
+    this.clientService.clientClientIdDelete(clientId).subscribe(response => {
       this.dataStoreService.dataChanged(clientId);
       this.clientOverviewIsLoading = false;
     });

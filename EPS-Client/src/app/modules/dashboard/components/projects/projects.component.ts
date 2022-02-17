@@ -92,7 +92,7 @@ export class ProjectsComponent implements OnInit {
 
     const projectId = this.projectTable.selectedRow.id;
 
-    this.projectService.projectProjectProjectIdDelete(projectId).subscribe(response => {
+    this.projectService.projectProjectIdDelete(projectId).subscribe(response => {
       this.dataStoreService.dataChanged(projectId);
       this.projectOverviewIsLoading = false;
     });
