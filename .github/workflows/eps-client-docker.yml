@@ -39,4 +39,4 @@ jobs:
           
       - name: deploy new EPS-Client docker container
         run: |
-          docker run -d --name eps-client -p 8080:80 eps-client:v1 
+          docker run -d --name eps-client -p 6000:80 eps-client:v1 
