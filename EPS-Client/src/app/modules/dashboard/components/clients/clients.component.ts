@@ -9,7 +9,7 @@ import { TableComponent } from '../../../commonUi/components/table/table.compone
 import { ColumnDisplayType } from '../../../commonUi/enums/columnDisplayType.enum';
 import { ColumnFilterType } from '../../../commonUi/enums/columnFilterType.enum';
 import { ColumnDefinition } from '../../../commonUi/interfaces/columnDefinition.interface';
-import { DisplayClient } from '../../interfaces/displayClient.Interface';
+import { DisplayClient } from '../../interfaces/DisplayClient.Interface';
 
 @Component({
   selector: 'app-clients',

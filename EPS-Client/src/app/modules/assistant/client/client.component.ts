@@ -4,7 +4,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DatastoreService } from '../../../services/datastore.service';
 import { EditServiceService } from '../../../services/editService.service';
 import { ClientCreationRequest, ClientEditRequest, ClientService } from '../../api';
-import { DisplayClient } from '../../dashboard/interfaces/displayClient.Interface';
+import { DisplayClient } from '../../dashboard/interfaces/DisplayClient.Interface';
 
 @Component({
   selector: 'app-client',
