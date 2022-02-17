@@ -37,6 +37,7 @@ jobs:
       - name: stop current EPS-API docker container
         run: |
           docker stop eps
+          docker rm eps
           
       - name: deploy new EPS-API docker container
         run: |
