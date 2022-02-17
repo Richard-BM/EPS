@@ -29,4 +29,15 @@ jobs:
       - name: docker build
         run: |
           docker build ./EPS -t eps:v1
-        
+  
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+      - name: stop current EPS-API docker container
+        run: |
+          docker stop eps
+          
+      - name: deploy new EPS-API docker container
+        run: |
+          docker run -d -p 8080:80 -p 4043:443 eps:v1 
