@@ -41,4 +41,4 @@ jobs:
           
       - name: deploy new EPS-API docker container
         run: |
-          docker run -d -p 8080:80 -p 4043:443 eps:v1 
+          docker run -d --name eps -p 8080:80 -p 4043:443 eps:v1 
