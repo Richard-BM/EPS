@@ -1,7 +1,8 @@
 FROM node:16 AS builder
 WORKDIR /app
 COPY . .
-RUN npm i && npm run build
+RUN npm install
+RUN npm run build --prod
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
