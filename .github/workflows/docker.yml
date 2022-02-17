@@ -28,5 +28,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: docker build
         run: |
-          docker build ./EPS -t EPS:v1
+          docker build ./EPS -t eps:v1
         
