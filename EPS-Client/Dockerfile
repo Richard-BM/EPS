@@ -1,12 +1,12 @@
 FROM node:16 AS builder
-WORKDIR /app
+WORKDIR /dist/src/app
+COPY package.json package-lock.json ./
+RUN npm cache clean --force
 COPY . .
 RUN npm install
 RUN npm run build --prod
 
 FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=builder /app/dist .
-EXPOSE 4200
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+COPY --from=builder /dist/src/app/dist /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+EXPOSE 80
