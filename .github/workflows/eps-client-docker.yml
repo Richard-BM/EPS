@@ -17,18 +17,26 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16.14.0'
-
+    
       # Runs a single command using the runners shell
       - name: docker build
         working-directory: ./EPS-Client
         run: |
           docker build -t eps:v1 -f Dockerfile .
+          
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    
+    steps:
+      - name: stop current EPS-Client docker container
+        run: |
+          docker stop eps-client
+          docker rm eps-client
+          
+      - name: deploy new EPS-API docker container
+        run: |
+          docker run -d --name eps-client -p 8080:80 eps-client:v1 
+
