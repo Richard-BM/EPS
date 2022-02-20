@@ -1,4 +1,4 @@
-FROM node:16 AS builder
+FROM node:16.14.0 AS builder
 WORKDIR /dist/src/app
 COPY package.json package-lock.json ./
 RUN npm cache clean --force
