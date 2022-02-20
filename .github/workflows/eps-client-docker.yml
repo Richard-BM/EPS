@@ -38,5 +38,5 @@ jobs:
           
       - name: deploy new EPS-API docker container
         run: |
-          docker run -d --name eps-client -p 8080:80 eps-client:v1 
+          docker run -d --name eps-client -p 6001:80 eps-client:v1 
 
