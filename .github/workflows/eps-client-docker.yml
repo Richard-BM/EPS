@@ -21,7 +21,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - working-directory: ./EPS-Client
       
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -34,5 +33,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: docker build
+        working-directory: ./EPS-Client
         run: |
           docker build -t eps:v1 -f Dockerfile .
