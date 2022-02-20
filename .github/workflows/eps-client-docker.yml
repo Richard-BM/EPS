@@ -29,7 +29,8 @@ jobs:
           node-version: '16.14.0'
           
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
 
       # Runs a single command using the runners shell
       - name: docker build
