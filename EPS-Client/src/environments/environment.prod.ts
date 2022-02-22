@@ -10,7 +10,6 @@ export const environment = {
 export function apiConfiguration() {
     return new Configuration({
       basePath: "https://eps.richard-software.de:80",
-    });
 }
 
 export function HttpLoaderFactory(http: HttpClient) {

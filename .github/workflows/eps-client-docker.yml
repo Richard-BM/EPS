@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: EPS-Client Build & Deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+    
+      # Runs a single command using the runners shell
+      - name: docker build
+        working-directory: ./EPS-Client
+        run: |
+          docker build -t eps:v1 -f Dockerfile .
+          
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    
+    steps:
+      - name: stop current EPS-Client docker container
+        run: |
+          docker stop eps-client
+          docker rm eps-client
+          
+      - name: deploy new EPS-API docker container
+        run: |
+          docker run -d --name eps-client -p 6001:80 eps-client:v1 
+

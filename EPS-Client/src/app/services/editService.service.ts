@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { DisplayAppointment } from '../modules/dashboard/interfaces/DisplayAppointment.Interface';
-import { DisplayClient } from '../modules/dashboard/interfaces/displayClient.Interface';
+import { DisplayClient } from '../modules/dashboard/interfaces/DisplayClient.Interface';
 import { DisplayLocation } from '../modules/dashboard/interfaces/DisplayLocation.Interface';
 import { DisplayPerson } from '../modules/dashboard/interfaces/DisplayPerson.Interface';
 import { DisplayProjects } from '../modules/dashboard/interfaces/DisplayProjects.Interface';
