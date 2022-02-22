@@ -39,11 +39,14 @@ export class AssistentPersonComponent implements OnInit {
 
   public onFinish() {
     if (this.personEdit.changed) {
-      let changedPerson: PersonEditRequest = {
+      const dateParts = this.personEdit.dateOfBirth.split('.');
+      const dateObject = new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]); 
+
+      const changedPerson: PersonEditRequest = {
         firstname: this.personEdit.firstname,
         lastname: this.personEdit.lastname,
         email: this.personEdit.email,
-        dateOfBirth: new Date(this.personEdit.dateOfBirth)
+        dateOfBirth: dateObject
       }
 
       this.personService.personPersonIdPut(this.personEdit.id, changedPerson).subscribe(clientResponse => {
@@ -53,7 +56,7 @@ export class AssistentPersonComponent implements OnInit {
 
 
     } else if (this.personEdit.isNew) {
-      let newPerson: RegisterRequest = {
+      const newPerson: RegisterRequest = {
         firstname: this.personEdit.firstname,
         lastname: this.personEdit.lastname,
         email: this.personEdit.email,
